@@ -156,8 +156,15 @@ bool Piece::isValidMove(std::pair<int, int> position)
 
 bool Piece::move(std::pair<int, int> position)
 {
-    // This method will be implemented in the child classes by overriding it
-    return true;
+    if (isValidMove(position))
+    {
+        this->position = position;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 #endif
