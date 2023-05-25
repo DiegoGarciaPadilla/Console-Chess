@@ -21,7 +21,7 @@ class Pawn : public Piece
 {
 private:
     // Attributes
-    std::string symbol = "P"; // P for pawn
+    std::string symbol = ""; // The pawn has no symbol
 public:
     // Constructor
     Pawn();
