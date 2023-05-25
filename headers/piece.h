@@ -14,12 +14,14 @@
 
 #include <iostream>
 #include <utility>
+#include <string>
 
 class Piece
 {
 protected:
     // Attributes
     int color; // 0 = white, 1 = black
+    std::string symbol; // Symbol to print on the board
     std::pair<int, int> position;   // (x, y)
     bool isCaptured = false;   // true = captured, false = not captured
 public:
@@ -29,11 +31,13 @@ public:
 
     // Getters
     int getColor();
+    std::string getSymbol();
     std::pair<int, int> getPosition();
     bool getIsCaptured();
 
     // Setters
     void setColor(int color);
+    void setSymbol(std::string symbol);
     void setPosition(std::pair<int, int> position);
     void setIsCaptured(bool isCaptured);
 
@@ -84,6 +88,17 @@ int Piece::getColor()
 }
 
 /**
+ * @brief Get the Symbol object
+ * 
+ * @return std::string 
+ */
+
+std::string Piece::getSymbol()
+{
+    return this->symbol;
+}
+
+/**
  * @brief Get the Position object
  * 
  * @return std::pair<int, int> 
@@ -117,6 +132,17 @@ bool Piece::getIsCaptured()
 void Piece::setColor(int color)
 {
     this->color = color;
+}
+
+/**
+ * @brief Set the Symbol object
+ * 
+ * @param symbol 
+ */
+
+void Piece::setSymbol(std::string symbol)
+{
+    this->symbol = symbol;
 }
 
 /**

@@ -21,6 +21,7 @@ class Queen : public Piece
 {
 private:
     // Attributes
+    std::string symbol = "Q"; // Q for queen
 public:
     // Constructor
     Queen();

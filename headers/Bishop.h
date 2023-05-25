@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <utility>
+#include <string>
 
 #include "Piece.h" // Parent class
 
@@ -21,6 +22,7 @@ class Bishop : public Piece
 {
 private:
     // Attributes
+    std::string symbol = "B"; // B for bishop
 public:
     // Constructor
     Bishop();

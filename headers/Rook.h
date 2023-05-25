@@ -21,6 +21,7 @@ class Rook : public Piece
 {
 private:
     // Attributes
+    std::string symbol = "R"; // R for rook
 public:
     // Constructor
     Rook();

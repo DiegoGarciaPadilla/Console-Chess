@@ -21,6 +21,7 @@ class King : public Piece
 {
 private:
     // Attributes
+    std::string symbol = "K"; // K for king
 public:
     // Constructor
     King();
