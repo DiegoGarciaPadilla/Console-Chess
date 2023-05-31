@@ -42,7 +42,7 @@ public:
     void setIsCaptured(bool isCaptured);
 
     // Methods
-    bool isValidMove(std::pair<int, int> positionToMove);
+    virtual bool isValidMove(std::pair<int, int> positionToMove);
     bool move(std::pair<int, int> position);
 };
 
