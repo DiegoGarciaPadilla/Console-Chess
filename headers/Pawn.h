@@ -71,11 +71,12 @@ Pawn::Pawn(int color, std::pair<int, int> position)
 
 bool Pawn::isValidMove(std::pair<int, int> positionToMove)
 {
-    if (position.first != positionToMove.first) // If the pawn is moving horizontally
+    // Check if the Pawn is moving horizontally
+    if (position.first != positionToMove.first) 
     {
         return false;
     }
-
+    
     if (color == 0) // White
     {
         if (position.second == positionToMove.second + 1)

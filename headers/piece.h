@@ -56,6 +56,7 @@ public:
 Piece::Piece()
 {
     this->color = 0;
+    this->symbol = "";
     this->position = std::make_pair(0, 0);
     this->isCaptured = false;
 }
@@ -70,6 +71,7 @@ Piece::Piece()
 Piece::Piece(int color, std::pair<int, int> position)
 {
     this->color = color;
+    this->symbol = "";
     this->position = position;
     this->isCaptured = false;
 }
