@@ -21,9 +21,13 @@ class Piece
 protected:
     // Attributes
     int color; // 0 = white, 1 = black
+
+    std::string name = ""; // Name of the piece
     std::string symbol = ""; // Symbol to print on the board
+
     std::pair<int, int> position;   // (x, y)
     bool isCaptured = false;   // true = captured, false = not captured
+
 public:
     // Constructor
     Piece();
@@ -31,12 +35,14 @@ public:
 
     // Getters
     int getColor();
+    std::string getName();
     std::string getSymbol();
     std::pair<int, int> getPosition();
     bool getIsCaptured();
 
     // Setters
     void setColor(int color);
+    void setName(std::string name);
     void setSymbol(std::string symbol);
     void setPosition(std::pair<int, int> position);
     void setIsCaptured(bool isCaptured);
@@ -86,6 +92,17 @@ int Piece::getColor()
 }
 
 /**
+ * @brief Get the Name object
+ * 
+ * @return std::string 
+ */
+
+std::string Piece::getName()
+{
+    return this->name;
+}
+
+/**
  * @brief Get the Symbol object
  * 
  * @return std::string 
@@ -130,6 +147,17 @@ bool Piece::getIsCaptured()
 void Piece::setColor(int color)
 {
     this->color = color;
+}
+
+/**
+ * @brief Set the Name object
+ * 
+ * @param name  
+ */
+
+void Piece::setName(std::string name)
+{
+    this->name = name;
 }
 
 /**

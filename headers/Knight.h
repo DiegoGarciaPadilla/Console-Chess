@@ -21,6 +21,7 @@ class Knight : public Piece
 {
 private:
     // Attributes
+    std::string name = "Knight"; // Name of the piece
     std::string symbol = "N"; // N for knight
 public:
     // Constructor

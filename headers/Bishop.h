@@ -22,6 +22,7 @@ class Bishop : public Piece
 {
 private:
     // Attributes
+    std::string name = "Bishop"; // Name of the piece
     std::string symbol = "B"; // B for bishop
 public:
     // Constructor
