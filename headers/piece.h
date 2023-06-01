@@ -41,9 +41,6 @@ public:
     bool getIsCaptured();
 
     // Setters
-    void setColor(int color);
-    void setName(std::string name);
-    void setSymbol(std::string symbol);
     void setPosition(std::pair<int, int> position);
     void setIsCaptured(bool isCaptured);
 
@@ -137,39 +134,6 @@ bool Piece::getIsCaptured()
 }
 
 // Setters
-
-/**
- * @brief Set the Color object
- * 
- * @param color 
- */
-
-void Piece::setColor(int color)
-{
-    this->color = color;
-}
-
-/**
- * @brief Set the Name object
- * 
- * @param name  
- */
-
-void Piece::setName(std::string name)
-{
-    this->name = name;
-}
-
-/**
- * @brief Set the Symbol object
- * 
- * @param symbol 
- */
-
-void Piece::setSymbol(std::string symbol)
-{
-    this->symbol = symbol;
-}
 
 /**
  * @brief Set the Position object
