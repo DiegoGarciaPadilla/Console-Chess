@@ -34,6 +34,9 @@ public:
     // Constructor
     Board();
 
+    // Destructor
+    ~Board();
+
     // Getters
     int getTurn();
 
@@ -66,6 +69,25 @@ Board::Board()
 
     // Set the turn to white
     turn = 0;
+}
+
+// Destructor
+
+/**
+ * @brief Destroy the Board:: Board object
+ * 
+ */
+
+Board::~Board()
+{
+    // Delete the pieces
+    for (int i = 2; i < 6; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            delete board[i][j];
+        }
+    }
 }
 
 // Getters
