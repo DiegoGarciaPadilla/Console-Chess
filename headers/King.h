@@ -38,12 +38,7 @@ public:
  * 
  */
 
-King::King()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
+King::King() : Piece() {}
 
 /**
  * @brief Construct a new King:: King object
@@ -52,12 +47,7 @@ King::King()
  * @param position 
  */
 
-King::King(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+King::King(int color, std::pair<int, int> position) : Piece(color, position) {}
 
 // Methods
 

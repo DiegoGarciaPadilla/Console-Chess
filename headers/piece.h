@@ -21,7 +21,7 @@ class Piece
 protected:
     // Attributes
     int color; // 0 = white, 1 = black
-    std::string symbol; // Symbol to print on the board
+    std::string symbol = ""; // Symbol to print on the board
     std::pair<int, int> position;   // (x, y)
     bool isCaptured = false;   // true = captured, false = not captured
 public:
@@ -56,9 +56,7 @@ public:
 Piece::Piece()
 {
     this->color = 0;
-    this->symbol = "";
     this->position = std::make_pair(0, 0);
-    this->isCaptured = false;
 }
 
 /**
@@ -71,9 +69,7 @@ Piece::Piece()
 Piece::Piece(int color, std::pair<int, int> position)
 {
     this->color = color;
-    this->symbol = "";
     this->position = position;
-    this->isCaptured = false;
 }
 
 // Getters

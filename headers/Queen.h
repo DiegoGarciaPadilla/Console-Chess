@@ -38,12 +38,7 @@ public:
  * 
  */
 
-Queen::Queen()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
+Queen::Queen() : Piece() {}
 
 /**
  * @brief Construct a new Queen:: Queen object
@@ -52,12 +47,7 @@ Queen::Queen()
  * @param position 
  */
 
-Queen::Queen(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+Queen::Queen(int color, std::pair<int, int> position) : Piece(color, position) {}
 
 // Methods
 

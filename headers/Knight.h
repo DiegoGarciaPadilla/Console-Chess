@@ -38,13 +38,7 @@ public:
  * 
  */
 
-Knight::Knight()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
-
+Knight::Knight() : Piece() {}
 /**
  * @brief Construct a new Knight:: Knight object
  * 
@@ -52,12 +46,7 @@ Knight::Knight()
  * @param position 
  */
 
-Knight::Knight(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+Knight::Knight(int color, std::pair<int, int> position) : Piece(color, position) {}
 
 // Methods
 

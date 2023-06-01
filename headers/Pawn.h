@@ -52,12 +52,7 @@ Pawn::Pawn()
  * @param position 
  */
 
-Pawn::Pawn(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+Pawn::Pawn(int color, std::pair<int, int> position) : Piece(color, position){}
 
 // Methods
 

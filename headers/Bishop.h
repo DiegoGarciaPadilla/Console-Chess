@@ -39,12 +39,7 @@ public:
  * 
  */
 
-Bishop::Bishop()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
+Bishop::Bishop(): Piece() {}
 
 /**
  * @brief Construct a new Bishop:: Bishop object
@@ -53,12 +48,7 @@ Bishop::Bishop()
  * @param position 
  */
 
-Bishop::Bishop(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+Bishop::Bishop(int color, std::pair<int, int> position): Piece(color, position) {}
 
 // Methods
 
