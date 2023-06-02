@@ -23,59 +23,20 @@
 #include "headers\King.h" // King subclass
 #include "headers\Board.h" // Board class
 
-void testPiece(Piece *piece)
-{
-    std::pair<int, int> position1 = std::make_pair(1, 1);
-    std::pair<int, int> position2 = std::make_pair(1, 0);
-    std::pair<int, int> position3 = std::make_pair(2, 1);
-
-    std::cout << "Piece color: " << piece->getColor() << std::endl;
-    std::cout << "Piece symbol: " << piece->getSymbol() << std::endl;
-    std::cout << "Piece position: (" << piece->getPosition().first << ", " << piece->getPosition().second << ")" << std::endl;
-    std::cout << "Piece isCaptured: " << piece->getIsCaptured() << std::endl;
-
-    std::cout << "Piece isValidMove(1, 1): " << piece->isValidMove(position1) << std::endl;
-    std::cout << "Piece isValidMove(1, 0): " << piece->isValidMove(position2) << std::endl;
-    std::cout << "Piece isValidMove(2, 1): " << piece->isValidMove(position3) << std::endl;
-}
-
 int main()
 {
-    // Create pieces
-    Piece *pawn = new Pawn(0, std::make_pair(0, 0));
-    Piece *rook = new Rook(0, std::make_pair(0, 0));
-    Piece *knight = new Knight(0, std::make_pair(0, 0));
-    Piece *bishop = new Bishop(0, std::make_pair(0, 0));
-    Piece *queen = new Queen(0, std::make_pair(0, 0));
-    Piece *king = new King(0, std::make_pair(0, 0));
+    // Create board
+    Board board;
 
-    // Test pieces
+    // Initialize board
+    board.initializeBoard();
 
-    std::cout << "Pawn" << std::endl;
-    testPiece(pawn);
+    // Print board info
+    board.boardInfo();
 
-    std::cout << "Rook" << std::endl;
-    testPiece(rook);
+    // Pause
+    system("pause");
 
-    std::cout << "Knight" << std::endl;
-    testPiece(knight);
-
-    std::cout << "Bishop" << std::endl;
-    testPiece(bishop);
-
-    std::cout << "Queen" << std::endl;
-    testPiece(queen);
-
-    std::cout << "King" << std::endl;
-    testPiece(king);
-
-    // Delete pieces
-
-    delete pawn;
-    delete rook;
-    delete knight;
-    delete bishop;
-    delete queen;
-    delete king;
-
+    // Delete board
+    board.~Board();
 }

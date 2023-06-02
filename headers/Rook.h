@@ -29,6 +29,7 @@ public:
     Rook(int color, std::pair<int, int> position);
 
     // Methods
+    void showPieceInfo();
     bool isValidMove(std::pair<int, int> positionToMove);
 };
 
@@ -51,6 +52,20 @@ Rook::Rook() : Piece() {}
 Rook::Rook(int color, std::pair<int, int> position) : Piece(color, position){}
 
 // Methods
+
+/**
+ * @brief Shows the piece's information
+ * 
+ */
+
+void Rook::showPieceInfo()
+{
+    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Symbol: " << symbol << std::endl;
+    std::cout << "Color: " << color << std::endl;
+    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
+    std::cout << "Is captured: " << isCaptured << std::endl;
+}
 
 /**
  * @brief Check if the move is valid

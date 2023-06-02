@@ -46,6 +46,8 @@ public:
 
     // Methods
     virtual bool isValidMove(std::pair<int, int> positionToMove);
+    virtual void showPieceInfo();
+
     bool move(std::pair<int, int> position);
 };
 
@@ -160,6 +162,21 @@ bool Piece::isValidMove(std::pair<int, int> position)
 {
     // This method will be implemented in the child classes by overriding it
     return true;
+}
+
+/**
+ * @brief Show the piece information
+ * 
+ * @return void
+ */
+
+void Piece::showPieceInfo()
+{
+    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Symbol: " << symbol << std::endl;
+    std::cout << "Color: " << color << std::endl;
+    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
+    std::cout << "Is captured: " << isCaptured << std::endl;
 }
 
 /**

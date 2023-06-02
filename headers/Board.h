@@ -46,7 +46,7 @@ public:
     // Methods
     void initializeBoard();
     void printBoard();
-    bool movePiece(std::string command);
+    void boardInfo();
 };
 
 // Constructor
@@ -211,6 +211,29 @@ void Board::printBoard()
         {
             std::cout << board[i][j]->getSymbol() << " ";
         }
+        std::cout << std::endl;
+    }
+}
+
+/**
+ * @brief Print the board with the information of the pieces
+ * 
+ */
+
+void Board::boardInfo()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        std::cout << "Row: " << i << std::endl;
+        std::cout << std::endl;
+
+        for (int j = 0; j < 8; j++)
+        {
+            std::cout << "Position: " << "(" << i << ", " << j << ")" << std::endl;
+            board[i][j]->showPieceInfo();
+            std::cout << std::endl;
+        }
+        
         std::cout << std::endl;
     }
 }
