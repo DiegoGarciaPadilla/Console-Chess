@@ -39,12 +39,7 @@ public:
  * 
  */
 
-Rook::Rook()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
+Rook::Rook() : Piece() {}
 
 /**
  * @brief Construct a new Rook:: Rook object
@@ -53,12 +48,7 @@ Rook::Rook()
  * @param position 
  */
 
-Rook::Rook(int color, std::pair<int, int> position)
-{
-    this->color = color;
-    this->position = position;
-    this->isCaptured = false;
-}
+Rook::Rook(int color, std::pair<int, int> position) : Piece(color, position){}
 
 // Methods
 
