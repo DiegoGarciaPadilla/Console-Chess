@@ -22,8 +22,8 @@ protected:
     // Attributes
     int color; // 0 = white, 1 = black
 
-    std::string name = ""; // Name of the piece
-    std::string symbol = ""; // Symbol to print on the board
+    std::string name = " "; // Name of the piece
+    std::string symbol = " "; // Symbol to print on the board
 
     std::pair<int, int> position;   // (x, y)
     bool isCaptured = false;   // true = captured, false = not captured
@@ -33,18 +33,18 @@ public:
     Piece();
     Piece(int color, std::pair<int, int> position);
 
-    // Getters
-    int getColor();
-    std::string getName();
-    std::string getSymbol();
-    std::pair<int, int> getPosition();
-    bool getIsCaptured();
+    // Getters (the getters are virtual because they are overriden in the subclasses)
+    virtual std::string getName();
+    virtual int getColor();
+    virtual std::string getSymbol();
+    virtual std::pair<int, int> getPosition();
+    virtual bool getIsCaptured();
 
-    // Setters
-    void setPosition(std::pair<int, int> position);
-    void setIsCaptured(bool isCaptured);
+    // Setters (the setters are virtual because they are overriden in the subclasses)
+    virtual void setPosition(std::pair<int, int> position);
+    virtual void setIsCaptured(bool isCaptured);
 
-    // Methods
+    // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int> positionToMove);
     virtual void showPieceInfo();
 
@@ -146,6 +146,17 @@ bool Piece::getIsCaptured()
 void Piece::setPosition(std::pair<int, int> position)
 {
     this->position = position;
+}
+
+/**
+ * @brief Set the Is Captured object
+ * 
+ * @param isCaptured 
+ */
+
+void Piece::setIsCaptured(bool isCaptured)
+{
+    this->isCaptured = isCaptured;
 }
 
 // Methods

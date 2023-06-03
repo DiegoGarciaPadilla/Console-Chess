@@ -15,6 +15,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <string>
 
 #include "Piece.h"
 #include "Pawn.h"
@@ -197,22 +198,22 @@ void Board::initializeBoard()
 
 void Board::printBoard()
 {
-    std::cout << "  ";
-    for (int i = 0; i < 8; i++)
-    {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
+
+    // Print the column numbers and the board
 
     for (int i = 0; i < 8; i++)
     {
         std::cout << i << " ";
+
         for (int j = 0; j < 8; j++)
         {
             std::cout << board[i][j]->getSymbol() << " ";
         }
+
         std::cout << std::endl;
     }
+
+    std::cout << "  0 1 2 3 4 5 6 7" << std::endl;
 }
 
 /**

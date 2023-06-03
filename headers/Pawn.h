@@ -22,11 +22,22 @@ class Pawn : public Piece
 private:
     // Attributes
     std::string name = "Pawn"; // Name of the piece
-    std::string symbol = ""; // The pawn has no symbol
+    std::string symbol = "P"; // P for pawn
 public:
     // Constructor
     Pawn();
     Pawn(int color, std::pair<int, int> position);
+
+    // Getters
+    std::string getName() { return name; };
+    int getColor() { return color; };
+    std::string getSymbol() { return symbol; };
+    std::pair<int, int> getPosition() { return position; };
+    bool getIsCaptured() { return isCaptured; };
+
+    // Setters
+    void setPosition(std::pair<int, int> position) { this->position = position; };
+    void setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
 
     // Methods
     void showPieceInfo();

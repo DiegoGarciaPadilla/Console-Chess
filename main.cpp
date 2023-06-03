@@ -31,8 +31,8 @@ int main()
     // Initialize board
     board.initializeBoard();
 
-    // Print board info
-    board.boardInfo();
+    // Print board
+    board.printBoard();
 
     // Pause
     system("pause");
