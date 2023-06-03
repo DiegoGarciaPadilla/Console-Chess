@@ -29,15 +29,15 @@ public:
     Knight(int color, std::pair<int, int> position);
 
     // Getters
-    std::string getName() { return name; };
-    int getColor() { return color; };
-    std::string getSymbol() { return symbol; };
-    std::pair<int, int> getPosition() { return position; };
-    bool getIsCaptured() { return isCaptured; };
+    std::string getName();
+    int getColor();
+    std::string getSymbol();
+    std::pair<int, int> getPosition();
+    bool getIsCaptured();
 
     // Setters
-    void setPosition(std::pair<int, int> position) { this->position = position; };
-    void setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
+    void setPosition(std::pair<int, int> position);
+    void setIsCaptured(bool isCaptured);
 
     // Methods
     void showPieceInfo();
@@ -60,6 +60,67 @@ Knight::Knight() : Piece() {}
  */
 
 Knight::Knight(int color, std::pair<int, int> position) : Piece(color, position) {}
+
+// Getters
+
+/**
+ * @brief Get the Name object
+ * 
+ * @return std::string 
+ */
+
+std::string Knight::getName() { return name; }
+
+/**
+ * @brief Get the Color object
+ * 
+ * @return int 
+ */
+
+int Knight::getColor() { return color; }
+
+/**
+ * @brief Get the Symbol object
+ * 
+ * @return std::string 
+ */
+
+std::string Knight::getSymbol() { return symbol; }
+
+/**
+ * @brief Get the Position object
+ * 
+ * @return std::pair<int, int> 
+ */
+
+std::pair<int, int> Knight::getPosition() { return position; }
+
+/**
+ * @brief Get the Is Captured object
+ * 
+ * @return true 
+ * @return false 
+ */
+
+bool Knight::getIsCaptured() { return isCaptured; }
+
+// Setters
+
+/**
+ * @brief Set the Position object
+ * 
+ * @param position 
+ */
+
+void Knight::setPosition(std::pair<int, int> position) { this->position = position; }
+
+/**
+ * @brief Set the Is Captured object
+ * 
+ * @param isCaptured 
+ */
+
+void Knight::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
 

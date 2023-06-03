@@ -4,9 +4,9 @@
  * @brief Definition of the Bishop subclass
  * @version 0.1
  * @date 2023-05-23
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef BISHOP_H
@@ -23,22 +23,22 @@ class Bishop : public Piece
 private:
     // Attributes
     std::string name = "Bishop"; // Name of the piece
-    std::string symbol = "B"; // B for bishop
+    std::string symbol = "B";    // B for bishop
 public:
     // Constructor
     Bishop();
     Bishop(int color, std::pair<int, int> position);
 
     // Getters
-    std::string getName() { return name; };
-    int getColor() { return color; };
-    std::string getSymbol() { return symbol; };
-    std::pair<int, int> getPosition() { return position; };
-    bool getIsCaptured() { return isCaptured; };
+    std::string getName();
+    int getColor();
+    std::string getSymbol();
+    std::pair<int, int> getPosition();
+    bool getIsCaptured();
 
     // Setters
-    void setPosition(std::pair<int, int> position) { this->position = position; };
-    void setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
+    void setPosition(std::pair<int, int> position);
+    void setIsCaptured(bool isCaptured);
 
     // Methods
     void showPieceInfo();
@@ -49,30 +49,90 @@ public:
 
 /**
  * @brief Construct a new Bishop:: Bishop object
- * 
+ *
  */
 
-Bishop::Bishop(): Piece() {}
+Bishop::Bishop() : Piece() {}
 
 /**
  * @brief Construct a new Bishop:: Bishop object
- * 
- * @param color 
- * @param position 
+ *
+ * @param color
+ * @param position
  */
 
-Bishop::Bishop(int color, std::pair<int, int> position): Piece(color, position) {}
+Bishop::Bishop(int color, std::pair<int, int> position) : Piece(color, position) {}
+
+// Getters
+
+/**
+ * @brief Get the Name object
+ *
+ * @return std::string
+ */
+
+std::string Bishop::getName() { return name; };
+
+/**
+ * @brief Get the Color object
+ *
+ * @return int
+ */
+
+int Bishop::getColor() { return color; };
+
+/**
+ * @brief Get the Symbol object
+ *
+ * @return std::string
+ */
+
+std::string Bishop::getSymbol() { return symbol; };
+
+/**
+ * @brief Get the Position object
+ *
+ * @return std::pair<int, int>
+ */
+
+std::pair<int, int> Bishop::getPosition() { return position; };
+
+/**
+ * @brief Get the Is Captured object
+ *
+ * @return bool
+ */
+
+bool Bishop::getIsCaptured() { return isCaptured; };
+
+// Setters
+
+/**
+ * @brief Set the Position object
+ *
+ * @param position
+ */
+
+void Bishop::setPosition(std::pair<int, int> position) { this->position = position; };
+
+/**
+ * @brief Set the Is Captured object
+ *
+ * @param isCaptured
+ */
+
+void Bishop::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
 
 // Methods
 
 /**
  * @brief Shows the piece's information
- * 
+ *
  */
 
 void Bishop::showPieceInfo()
 {
-    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Piece: " << name << std::endl;
     std::cout << "Symbol: " << symbol << std::endl;
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
@@ -81,13 +141,13 @@ void Bishop::showPieceInfo()
 
 /**
  * @brief Checks if the move is valid
- * 
- * @param positionToMove 
- * @return true 
- * @return false 
+ *
+ * @param positionToMove
+ * @return true
+ * @return false
  */
 
-bool Bishop::isValidMove(std::pair<int, int> positionToMove) 
+bool Bishop::isValidMove(std::pair<int, int> positionToMove)
 {
     // Get row and column of the position
     int xInitial = position.first;
@@ -106,9 +166,6 @@ bool Bishop::isValidMove(std::pair<int, int> positionToMove)
     {
         return false;
     }
-
-    // If the move is diagonal, is valid
-    return true;
 }
 
 #endif

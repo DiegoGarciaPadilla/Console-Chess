@@ -30,15 +30,15 @@ public:
     Pawn(int color, std::pair<int, int> position);
 
     // Getters
-    std::string getName() { return name; };
-    int getColor() { return color; };
-    std::string getSymbol() { return symbol; };
-    std::pair<int, int> getPosition() { return position; };
-    bool getIsCaptured() { return isCaptured; };
+    std::string getName();
+    int getColor();
+    std::string getSymbol();
+    std::pair<int, int> getPosition();
+    bool getIsCaptured();
 
     // Setters
-    void setPosition(std::pair<int, int> position) { this->position = position; };
-    void setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
+    void setPosition(std::pair<int, int> position);
+    void setIsCaptured(bool isCaptured);
 
     // Methods
     void showPieceInfo();
@@ -62,6 +62,67 @@ Pawn::Pawn() : Piece() {}
  */
 
 Pawn::Pawn(int color, std::pair<int, int> position) : Piece(color, position){}
+
+// Getters
+
+/**
+ * @brief Get the Name object
+ * 
+ * @return std::string 
+ */
+
+std::string Pawn::getName() { return name; }
+
+/**
+ * @brief Get the Color object
+ * 
+ * @return int 
+ */
+
+int Pawn::getColor() { return color; }
+
+/**
+ * @brief Get the Symbol object
+ * 
+ * @return std::string 
+ */
+
+std::string Pawn::getSymbol() { return symbol; }
+
+/**
+ * @brief Get the Position object
+ * 
+ * @return std::pair<int, int> 
+ */
+
+std::pair<int, int> Pawn::getPosition() { return position; }
+
+/**
+ * @brief Get the Is Captured object
+ * 
+ * @return true 
+ * @return false 
+ */
+
+bool Pawn::getIsCaptured() { return isCaptured; }
+
+// Setters
+
+/**
+ * @brief Set the Position object
+ * 
+ * @param position 
+ */
+
+void Pawn::setPosition(std::pair<int, int> position) { this->position = position; }
+
+/**
+ * @brief Set the Is Captured object
+ * 
+ * @param isCaptured 
+ */
+
+void Pawn::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
 

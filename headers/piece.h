@@ -4,9 +4,9 @@
  * @brief Definition of the Piece class
  * @version 0.1
  * @date 2023-05-20
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef PIECE_H
@@ -22,11 +22,11 @@ protected:
     // Attributes
     int color; // 0 = white, 1 = black
 
-    std::string name = " "; // Name of the piece
+    std::string name = " ";   // Name of the piece
     std::string symbol = " "; // Symbol to print on the board
 
-    std::pair<int, int> position;   // (x, y)
-    bool isCaptured = false;   // true = captured, false = not captured
+    std::pair<int, int> position; // (x, y)
+    bool isCaptured = false;      // true = captured, false = not captured
 
 public:
     // Constructor
@@ -53,7 +53,7 @@ public:
 
 /**
  * @brief Construct a new Piece:: Piece object
- * 
+ *
  */
 
 Piece::Piece()
@@ -64,9 +64,9 @@ Piece::Piece()
 
 /**
  * @brief Construct a new Piece:: Piece object
- * 
- * @param color 
- * @param position 
+ *
+ * @param color
+ * @param position
  */
 
 Piece::Piece(int color, std::pair<int, int> position)
@@ -79,8 +79,8 @@ Piece::Piece(int color, std::pair<int, int> position)
 
 /**
  * @brief Get the Color object
- * 
- * @return int 
+ *
+ * @return int
  */
 
 int Piece::getColor()
@@ -90,8 +90,8 @@ int Piece::getColor()
 
 /**
  * @brief Get the Name object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Piece::getName()
@@ -101,8 +101,8 @@ std::string Piece::getName()
 
 /**
  * @brief Get the Symbol object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Piece::getSymbol()
@@ -112,8 +112,8 @@ std::string Piece::getSymbol()
 
 /**
  * @brief Get the Position object
- * 
- * @return std::pair<int, int> 
+ *
+ * @return std::pair<int, int>
  */
 
 std::pair<int, int> Piece::getPosition()
@@ -123,9 +123,9 @@ std::pair<int, int> Piece::getPosition()
 
 /**
  * @brief Get the Is Captured object
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 
 bool Piece::getIsCaptured()
@@ -137,8 +137,8 @@ bool Piece::getIsCaptured()
 
 /**
  * @brief Set the Position object
- * 
- * @param position 
+ *
+ * @param position
  */
 
 void Piece::setPosition(std::pair<int, int> position)
@@ -148,8 +148,8 @@ void Piece::setPosition(std::pair<int, int> position)
 
 /**
  * @brief Set the Is Captured object
- * 
- * @param isCaptured 
+ *
+ * @param isCaptured
  */
 
 void Piece::setIsCaptured(bool isCaptured)
@@ -161,10 +161,10 @@ void Piece::setIsCaptured(bool isCaptured)
 
 /**
  * @brief Check if the move is valid
- * 
- * @param position 
- * @return true 
- * @return false 
+ *
+ * @param position
+ * @return true
+ * @return false
  */
 
 bool Piece::isValidMove(std::pair<int, int> position)
@@ -175,13 +175,13 @@ bool Piece::isValidMove(std::pair<int, int> position)
 
 /**
  * @brief Show the piece information
- * 
+ *
  * @return void
  */
 
 void Piece::showPieceInfo()
 {
-    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Piece: " << name << std::endl;
     std::cout << "Symbol: " << symbol << std::endl;
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;

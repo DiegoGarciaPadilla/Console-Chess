@@ -4,9 +4,9 @@
  * @brief Definition of the Board class
  * @version 0.1
  * @date 2023-05-25
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef BOARD_H
@@ -29,8 +29,8 @@ class Board
 {
 private:
     // Attributes
-    Piece* board[8][8];
-    int turn = 0;   // 0 = white, 1 = black
+    Piece *board[8][8];
+    int turn = 0; // 0 = white, 1 = black
 public:
     // Constructor
     Board();
@@ -58,7 +58,7 @@ public:
 
 /**
  * @brief Construct a new Board:: Board object
- * 
+ *
  */
 
 Board::Board()
@@ -80,7 +80,7 @@ Board::Board()
 
 /**
  * @brief Destroy the Board:: Board object
- * 
+ *
  */
 
 Board::~Board()
@@ -99,8 +99,8 @@ Board::~Board()
 
 /**
  * @brief Get the Turn object
- * 
- * @return int 
+ *
+ * @return int
  */
 
 int Board::getTurn()
@@ -112,8 +112,8 @@ int Board::getTurn()
 
 /**
  * @brief Set the Turn object
- * 
- * @param turn 
+ *
+ * @param turn
  */
 
 void Board::setTurn(int turn)
@@ -125,7 +125,7 @@ void Board::setTurn(int turn)
 
 /**
  * @brief Initialize the board with the pieces in their initial positions
- * 
+ *
  */
 
 void Board::initializeBoard()
@@ -196,7 +196,7 @@ void Board::initializeBoard()
 
 /**
  * @brief Print the board
- * 
+ *
  */
 
 void Board::printBoard()
@@ -215,19 +215,22 @@ void Board::printBoard()
             {
                 if (board[j][i]->getSymbol() == " ")
                 {
-                    std::cout << "  " << " | ";
+                    std::cout << "  "
+                              << " | ";
                 }
 
                 else
                 {
                     if (board[j][i]->getColor() == 0)
                     {
-                        std::cout << board[j][i]->getSymbol() << "w" << " | ";
+                        std::cout << board[j][i]->getSymbol() << "w"
+                                  << " | ";
                     }
 
                     else
                     {
-                        std::cout << board[j][i]->getSymbol() << "b" << " | ";
+                        std::cout << board[j][i]->getSymbol() << "b"
+                                  << " | ";
                     }
                 }
             }
@@ -243,45 +246,48 @@ void Board::printBoard()
     else
     {
         {
-        std::cout << "  -----------------------------------------" << std::endl;
+            std::cout << "  -----------------------------------------" << std::endl;
 
-        for (int i = 0; i < 8; i++)
-        {
-            std::cout << i << " | ";
-
-            for (int j = 7; j >= 0; j--)
+            for (int i = 0; i < 8; i++)
             {
-                if (board[j][i]->getSymbol() == " ")
-                {
-                    std::cout << "  " << " | ";
-                }
+                std::cout << i << " | ";
 
-                else
+                for (int j = 7; j >= 0; j--)
                 {
-                    if (board[j][i]->getColor() == 0)
+                    if (board[j][i]->getSymbol() == " ")
                     {
-                        std::cout << board[j][i]->getSymbol() << "w" << " | ";
+                        std::cout << "  "
+                                  << " | ";
                     }
 
                     else
                     {
-                        std::cout << board[j][i]->getSymbol() << "b" << " | ";
+                        if (board[j][i]->getColor() == 0)
+                        {
+                            std::cout << board[j][i]->getSymbol() << "w"
+                                      << " | ";
+                        }
+
+                        else
+                        {
+                            std::cout << board[j][i]->getSymbol() << "b"
+                                      << " | ";
+                        }
                     }
                 }
+
+                std::cout << std::endl;
+                std::cout << "  -----------------------------------------" << std::endl;
             }
 
-            std::cout << std::endl;
-            std::cout << "  -----------------------------------------" << std::endl;
+            std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
         }
-
-        std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
-    }
     }
 }
 
 /**
  * @brief Print the board with the information of the pieces
- * 
+ *
  */
 
 void Board::boardInfo()
@@ -293,22 +299,23 @@ void Board::boardInfo()
 
         for (int j = 0; j < 8; j++)
         {
-            std::cout << "Position: " << "(" << i << ", " << j << ")" << std::endl;
+            std::cout << "Position: "
+                      << "(" << i << ", " << j << ")" << std::endl;
             board[j][i]->showPieceInfo();
             std::cout << std::endl;
         }
-        
+
         std::cout << std::endl;
     }
 }
 
 /**
  * @brief Move a piece from an initial position to a final position
- * 
- * @param initialPosition 
- * @param finalPosition 
- * @return true 
- * @return false 
+ *
+ * @param initialPosition
+ * @param finalPosition
+ * @return true
+ * @return false
  */
 
 bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
@@ -381,13 +388,12 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     turn = (turn + 1) % 2;
 
     return true;
-
 }
 
 /**
  * @brief Get the piece in the given position
- * 
- * @param position 
+ *
+ * @param position
  */
 
 void Board::getPiece(std::pair<int, int> position)
@@ -417,6 +423,5 @@ void Board::getPiece(std::pair<int, int> position)
 
     board[row][column]->showPieceInfo();
 }
-
 
 #endif
