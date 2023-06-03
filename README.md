@@ -6,7 +6,7 @@ Este repositorio contiene el diagrama UML del proyecto "Console Chess", un video
 
 El diagrama UML representa la estructura de clases del proyecto, mostrando las relaciones de herencia y composición entre las diferentes clases.
 
-![UML](uml/Console Chess.png)
+![UML](uml/uml.png)
 
 ## Avances
 
