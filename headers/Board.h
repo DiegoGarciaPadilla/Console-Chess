@@ -51,7 +51,7 @@ public:
     void boardInfo();
 
     bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
-    void getPiece(std::pair<int, int> position);
+    Piece *getPiece(std::pair<int, int> position);
 };
 
 // Constructor
@@ -135,7 +135,7 @@ void Board::initializeBoard()
     {
         for (int j = 0; j < 8; j++)
         {
-            board[i][j] = new Piece();
+            board[i][j] = nullptr;
         }
     }
 
@@ -213,7 +213,7 @@ void Board::printBoard()
 
             for (int j = 0; j < 8; j++)
             {
-                if (board[j][i]->getSymbol() == " ")
+                if (board[j][i] == nullptr)
                 {
                     std::cout << "  "
                               << " | ";
@@ -254,7 +254,7 @@ void Board::printBoard()
 
                 for (int j = 7; j >= 0; j--)
                 {
-                    if (board[j][i]->getSymbol() == " ")
+                    if (board[j][i] == nullptr)
                     {
                         std::cout << "  "
                                   << " | ";
@@ -301,7 +301,15 @@ void Board::boardInfo()
         {
             std::cout << "Position: "
                       << "(" << i << ", " << j << ")" << std::endl;
-            board[j][i]->showPieceInfo();
+
+            if (board[j][i] == nullptr)
+            {
+                std::cout << "No piece in this position" << std::endl;
+            }
+            else
+            {
+                board[j][i]->showPieceInfo();
+            }
             std::cout << std::endl;
         }
 
@@ -369,9 +377,16 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
         return false;
     }
 
+    // Check if the piece moves to a different position
+    if (xInitial == xFinal && yInitial == yFinal)
+    {
+        std::cout << "Piece does not move" << std::endl;
+        return false;
+    }
+
     // Check if the piece can move to the final position
 
-    if (!board[xInitial][yInitial]->isValidMove(finalPosition))
+    if (!board[xInitial][yInitial]->isValidMove(finalPosition, board))
     {
         std::cout << "Invalid move" << std::endl;
         return false;
@@ -382,7 +397,7 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
 
     // Update the board
     board[xFinal][yFinal] = board[xInitial][yInitial];
-    board[xInitial][yInitial] = new Piece();
+    board[xInitial][yInitial] = nullptr;
 
     // Update the turn
     turn = (turn + 1) % 2;
@@ -394,34 +409,24 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
  * @brief Get the piece in the given position
  *
  * @param position
+ * @return Piece
  */
 
-void Board::getPiece(std::pair<int, int> position)
+Piece *Board::getPiece(std::pair<int, int> position)
 {
     // Get row and column of the position
-
-    int row = position.first;
-    int column = position.second;
+    int x = position.first;
+    int y = position.second;
 
     // Check if the position is valid
-
-    if (row < 0 || row > 7 || column < 0 || column > 7)
+    if (x < 0 || x > 7 || y < 0 || y > 7)
     {
         std::cout << "Invalid position" << std::endl;
-        return;
+        return nullptr;
     }
 
-    // Check if the position is empty
-
-    if (board[row][column]->getSymbol() == " ")
-    {
-        std::cout << "Position is empty" << std::endl;
-        return;
-    }
-
-    // Show the information of the piece
-
-    board[row][column]->showPieceInfo();
+    // Return the piece in the position
+    return board[x][y];
 }
 
 #endif

@@ -41,7 +41,7 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 
 // Constructor
@@ -147,7 +147,7 @@ void Rook::showPieceInfo()
  * @return false
  */
 
-bool Rook::isValidMove(std::pair<int, int> positionToMove)
+bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;
@@ -166,6 +166,69 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove)
     {
         std::cout << "The rook only moves horizontally or vertically" << std::endl;
         return false;
+    }
+
+    // Check if there are pieces in the way
+
+    // If the move is horizontal
+    if (xDifference != 0)
+    {
+        // If the rook is moving to the right
+        if (xDifference > 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = xInitial + 1; i < xFinal; i++)
+            {
+                if (board.getPiece(std::make_pair(i, yInitial)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
+        // If the rook is moving to the left
+        else
+        {
+            // Check if there are pieces in the way
+            for (int i = xInitial - 1; i > xFinal; i--)
+            {
+                if (board.getPiece(std::make_pair(i, yInitial)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
+    }
+    // If the move is vertical
+    else
+    {
+        // If the rook is moving up
+        if (yDifference > 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = yInitial + 1; i < yFinal; i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial, i)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
+        // If the rook is moving down
+        else
+        {
+            // Check if there are pieces in the way
+            for (int i = yInitial - 1; i > yFinal; i--)
+            {
+                if (board.getPiece(std::make_pair(xInitial, i)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
     }
 
     // If the move is horizontal or vertical, it's valid

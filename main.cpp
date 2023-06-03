@@ -4,9 +4,9 @@
  * @brief Main file for the chess game
  * @version 0.1
  * @date 2023-05-29
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include <iostream>
@@ -14,14 +14,8 @@
 #include <string>
 #include <utility>
 
-#include "headers\Piece.h" // Parent class
-#include "headers\Pawn.h" // Pawn subclass
-#include "headers\Rook.h" // Rook subclass
-#include "headers\Knight.h" // Knight subclass
-#include "headers\Bishop.h" // Bishop subclass
-#include "headers\Queen.h" // Queen subclass
-#include "headers\King.h" // King subclass
-#include "headers\Board.h" // Board class
+#include "headers/Piece.h" // Parent class
+#include "headers/Board.h" // Board class
 
 int main()
 {
@@ -65,8 +59,8 @@ int main()
         std::cout << "Final Y position: ";
         std::cin >> finalY;
 
-        std::pair <int, int> initialPosition = std::make_pair(initialX, initialY);
-        std::pair <int, int> finalPosition = std::make_pair(finalX, finalY);
+        std::pair<int, int> initialPosition = std::make_pair(initialX, initialY);
+        std::pair<int, int> finalPosition = std::make_pair(finalX, finalY);
 
         // Move piece
         if (!board.movePiece(initialPosition, finalPosition))

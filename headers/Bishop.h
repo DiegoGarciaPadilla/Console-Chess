@@ -14,7 +14,6 @@
 
 #include <iostream>
 #include <utility>
-#include <string>
 
 #include "Piece.h" // Parent class
 
@@ -42,7 +41,7 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 
 // Constructor
@@ -147,7 +146,7 @@ void Bishop::showPieceInfo()
  * @return false
  */
 
-bool Bishop::isValidMove(std::pair<int, int> positionToMove)
+bool Bishop::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;
@@ -166,6 +165,63 @@ bool Bishop::isValidMove(std::pair<int, int> positionToMove)
     {
         return false;
     }
+
+    // Check if there are pieces in the way
+
+    // Check if the bishop is moving to the right and up
+    if (xDifference > 0 && yDifference > 0)
+    {
+        for (int i = 1; i < xDifference; i++)
+        {
+            if (board.getPiece(std::make_pair(xInitial + i, yInitial + i)) != nullptr)
+            {
+                std::cout << "There is a piece in the way" << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // Check if the bishop is moving to the right and down
+    else if (xDifference > 0 && yDifference < 0)
+    {
+        for (int i = 1; i < xDifference; i++)
+        {
+            if (board.getPiece(std::make_pair(xInitial + i, yInitial - i)) != nullptr)
+            {
+                std::cout << "There is a piece in the way" << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // Check if the bishop is moving to the left and up
+    else if (xDifference < 0 && yDifference > 0)
+    {
+        for (int i = 1; i < abs(xDifference); i++)
+        {
+            if (board.getPiece(std::make_pair(xInitial - i, yInitial + i)) != nullptr)
+            {
+                std::cout << "There is a piece in the way" << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // Check if the bishop is moving to the left and down
+    else if (xDifference < 0 && yDifference < 0)
+    {
+        for (int i = 1; i < abs(xDifference); i++)
+        {
+            if (board.getPiece(std::make_pair(xInitial - i, yInitial - i)) != nullptr)
+            {
+                std::cout << "There is a piece in the way" << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // If the bishop is moving diagonally and there are no pieces in the way, the move is valid
+    return true;
 }
 
 #endif

@@ -4,9 +4,9 @@
  * @brief Definition of the Knight subclass
  * @version 0.1
  * @date 2023-05-23
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef KNIGHT_H
@@ -22,7 +22,7 @@ class Knight : public Piece
 private:
     // Attributes
     std::string name = "Knight"; // Name of the piece
-    std::string symbol = "N"; // N for knight
+    std::string symbol = "N";    // N for knight
 public:
     // Constructor
     Knight();
@@ -41,22 +41,22 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 
 // Constructor
 
 /**
  * @brief Construct a new Knight:: Knight object
- * 
+ *
  */
 
 Knight::Knight() : Piece() {}
 /**
  * @brief Construct a new Knight:: Knight object
- * 
- * @param color 
- * @param position 
+ *
+ * @param color
+ * @param position
  */
 
 Knight::Knight(int color, std::pair<int, int> position) : Piece(color, position) {}
@@ -65,41 +65,41 @@ Knight::Knight(int color, std::pair<int, int> position) : Piece(color, position)
 
 /**
  * @brief Get the Name object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Knight::getName() { return name; }
 
 /**
  * @brief Get the Color object
- * 
- * @return int 
+ *
+ * @return int
  */
 
 int Knight::getColor() { return color; }
 
 /**
  * @brief Get the Symbol object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Knight::getSymbol() { return symbol; }
 
 /**
  * @brief Get the Position object
- * 
- * @return std::pair<int, int> 
+ *
+ * @return std::pair<int, int>
  */
 
 std::pair<int, int> Knight::getPosition() { return position; }
 
 /**
  * @brief Get the Is Captured object
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 
 bool Knight::getIsCaptured() { return isCaptured; }
@@ -108,16 +108,16 @@ bool Knight::getIsCaptured() { return isCaptured; }
 
 /**
  * @brief Set the Position object
- * 
- * @param position 
+ *
+ * @param position
  */
 
 void Knight::setPosition(std::pair<int, int> position) { this->position = position; }
 
 /**
  * @brief Set the Is Captured object
- * 
- * @param isCaptured 
+ *
+ * @param isCaptured
  */
 
 void Knight::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
@@ -126,12 +126,12 @@ void Knight::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 /**
  * @brief Shows the piece's information
- * 
+ *
  */
 
 void Knight::showPieceInfo()
 {
-    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Piece: " << name << std::endl;
     std::cout << "Symbol: " << symbol << std::endl;
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
@@ -140,13 +140,13 @@ void Knight::showPieceInfo()
 
 /**
  * @brief Checks if the move is valid
- * 
- * @param positionToMove 
- * @return true 
- * @return false 
+ *
+ * @param positionToMove
+ * @return true
+ * @return false
  */
 
-bool Knight::isValidMove(std::pair<int, int> positionToMove)
+bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;

@@ -16,6 +16,8 @@
 #include <utility>
 #include <string>
 
+class Board; // Forward declaration (to avoid circular dependencies)
+
 class Piece
 {
 protected:
@@ -45,7 +47,7 @@ public:
     virtual void setIsCaptured(bool isCaptured);
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
-    virtual bool isValidMove(std::pair<int, int> positionToMove);
+    virtual bool isValidMove(std::pair<int, int> positionToMove, Board &board);
     virtual void showPieceInfo();
 };
 
@@ -163,11 +165,12 @@ void Piece::setIsCaptured(bool isCaptured)
  * @brief Check if the move is valid
  *
  * @param position
+ * @param board
  * @return true
  * @return false
  */
 
-bool Piece::isValidMove(std::pair<int, int> position)
+bool Piece::isValidMove(std::pair<int, int> position, Board &board)
 {
     // This method will be implemented in the child classes by overriding it
     return true;

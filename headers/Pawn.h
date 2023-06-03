@@ -4,9 +4,9 @@
  * @brief Definition of the Pawn subclass
  * @version 0.1
  * @date 2023-05-23
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef PAWN_H
@@ -22,8 +22,8 @@ class Pawn : public Piece
 private:
     // Attributes
     std::string name = "Pawn"; // Name of the piece
-    std::string symbol = "P"; // P for pawn
-    bool isFirstMove = true; // True if it's the first move of the piece
+    std::string symbol = "P";  // P for pawn
+    bool isFirstMove = true;   // True if it's the first move of the piece
 public:
     // Constructor
     Pawn();
@@ -42,66 +42,66 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 
 // Constructor
 
 /**
  * @brief Construct a new Pawn:: Pawn object
- * 
+ *
  */
 
 Pawn::Pawn() : Piece() {}
 
 /**
  * @brief Construct a new Pawn:: Pawn object
- * 
- * @param color 
- * @param position 
+ *
+ * @param color
+ * @param position
  */
 
-Pawn::Pawn(int color, std::pair<int, int> position) : Piece(color, position){}
+Pawn::Pawn(int color, std::pair<int, int> position) : Piece(color, position) {}
 
 // Getters
 
 /**
  * @brief Get the Name object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Pawn::getName() { return name; }
 
 /**
  * @brief Get the Color object
- * 
- * @return int 
+ *
+ * @return int
  */
 
 int Pawn::getColor() { return color; }
 
 /**
  * @brief Get the Symbol object
- * 
- * @return std::string 
+ *
+ * @return std::string
  */
 
 std::string Pawn::getSymbol() { return symbol; }
 
 /**
  * @brief Get the Position object
- * 
- * @return std::pair<int, int> 
+ *
+ * @return std::pair<int, int>
  */
 
 std::pair<int, int> Pawn::getPosition() { return position; }
 
 /**
  * @brief Get the Is Captured object
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 
 bool Pawn::getIsCaptured() { return isCaptured; }
@@ -110,16 +110,16 @@ bool Pawn::getIsCaptured() { return isCaptured; }
 
 /**
  * @brief Set the Position object
- * 
- * @param position 
+ *
+ * @param position
  */
 
 void Pawn::setPosition(std::pair<int, int> position) { this->position = position; }
 
 /**
  * @brief Set the Is Captured object
- * 
- * @param isCaptured 
+ *
+ * @param isCaptured
  */
 
 void Pawn::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
@@ -128,12 +128,12 @@ void Pawn::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 /**
  * @brief Shows the piece's information
- * 
+ *
  */
 
 void Pawn::showPieceInfo()
 {
-    std::cout << "Piece: " <<  name << std::endl;
+    std::cout << "Piece: " << name << std::endl;
     std::cout << "Symbol: " << symbol << std::endl;
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
@@ -143,13 +143,13 @@ void Pawn::showPieceInfo()
 
 /**
  * @brief Checks if the move is valid
- * 
- * @param positionToMove 
- * @return true 
- * @return false 
+ *
+ * @param positionToMove
+ * @return true
+ * @return false
  */
 
-bool Pawn::isValidMove(std::pair<int, int> positionToMove)
+bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;
@@ -201,8 +201,6 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove)
     isFirstMove = false;
 
     return true;
-
 }
-
 
 #endif

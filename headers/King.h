@@ -41,7 +41,7 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 
 // Constructor
@@ -147,7 +147,7 @@ void King::showPieceInfo()
     std::cout << "Is captured: " << isCaptured << std::endl;
 }
 
-bool King::isValidMove(std::pair<int, int> positionToMove)
+bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;

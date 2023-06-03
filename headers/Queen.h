@@ -41,7 +41,7 @@ public:
 
     // Methods
     void showPieceInfo();
-    bool isValidMove(std::pair<int, int> positionToMove);
+    bool isValidMove(std::pair<int, int> positionToMove, Board &board)
 };
 
 // Constructor
@@ -147,7 +147,7 @@ void Queen::showPieceInfo()
  * @return false
  */
 
-bool Queen::isValidMove(std::pair<int, int> positionToMove)
+bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {
     // Get row and column of the position
     int xInitial = position.first;
@@ -168,7 +168,104 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove)
         return false;
     }
 
-    // If the move is diagonal, horizontal or vertical, return true
+    // Check if there are pieces in the way
+
+    // Check if the move is diagonal
+    if (xDifference == yDifference)
+    {
+        // Check if the move is diagonal up
+        if (xDifference > 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < xDifference; i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial + i, yInitial + i)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
+        // Check if the move is diagonal down
+        else
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < -xDifference; i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial - i, yInitial - i)) != nullptr)
+                {
+                    std::cout << "There are pieces in the way" << std::endl;
+                    return false;
+                }
+            }
+        }
+    }
+    // Check if the move is horizontal or vertical
+    else
+    {
+        // Check if the move is horizontal
+        if (xDifference == 0)
+        {
+            // Check if the move is horizontal right
+            if (yDifference > 0)
+            {
+                // Check if there are pieces in the way
+                for (int i = 1; i < yDifference; i++)
+                {
+                    if (board.getPiece(std::make_pair(xInitial, yInitial + i)) != nullptr)
+                    {
+                        std::cout << "There are pieces in the way" << std::endl;
+                        return false;
+                    }
+                }
+            }
+            // Check if the move is horizontal left
+            else
+            {
+                // Check if there are pieces in the way
+                for (int i = 1; i < -yDifference; i++)
+                {
+                    if (board.getPiece(std::make_pair(xInitial, yInitial - i)) != nullptr)
+                    {
+                        std::cout << "There are pieces in the way" << std::endl;
+                        return false;
+                    }
+                }
+            }
+        }
+        // Check if the move is vertical
+        else
+        {
+            // Check if the move is vertical up
+            if (xDifference > 0)
+            {
+                // Check if there are pieces in the way
+                for (int i = 1; i < xDifference; i++)
+                {
+                    if (board.getPiece(std::make_pair(xInitial + i, yInitial)) != nullptr)
+                    {
+                        std::cout << "There are pieces in the way" << std::endl;
+                        return false;
+                    }
+                }
+            }
+            // Check if the move is vertical down
+            else
+            {
+                // Check if there are pieces in the way
+                for (int i = 1; i < -xDifference; i++)
+                {
+                    if (board.getPiece(std::make_pair(xInitial - i, yInitial)) != nullptr)
+                    {
+                        std::cout << "There are pieces in the way" << std::endl;
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    // If the move is diagonal, horizontal or vertical, and there are no pieces in the way, the move is valid
     return true;
 }
 
