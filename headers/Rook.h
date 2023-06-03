@@ -88,14 +88,27 @@ void Rook::showPieceInfo()
 
 bool Rook::isValidMove(std::pair<int, int> positionToMove)
 {
-    if (positionToMove.first == position.first || positionToMove.second == position.second)
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
+
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
+
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the move is not horizontal or vertical
+    if (xDifference != 0 && yDifference != 0)
     {
-        return true;
-    }
-    else
-    {
+        std::cout << "The rook only moves horizontally or vertically" << std::endl;
         return false;
     }
+
+    // If the move is horizontal or vertical, it's valid
+    return true;
 }
 
 #endif

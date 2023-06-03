@@ -51,6 +51,7 @@ public:
     void boardInfo();
 
     bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
+    void getPiece(std::pair<int, int> position);
 };
 
 // Constructor
@@ -130,7 +131,7 @@ void Board::setTurn(int turn)
 void Board::initializeBoard()
 {
     // Initialize the board with empty spaces
-    for (int i = 2; i < 6; i++)
+    for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
         {
@@ -143,26 +144,26 @@ void Board::initializeBoard()
     // Pawns
     for (int i = 0; i < 8; i++)
     {
-        board[1][i] = new Pawn(0, std::make_pair(1, i));
+        board[i][1] = new Pawn(0, std::make_pair(i, 1));
     }
 
     // Rooks
     board[0][0] = new Rook(0, std::make_pair(0, 0));
-    board[0][7] = new Rook(0, std::make_pair(0, 7));
+    board[7][0] = new Rook(0, std::make_pair(7, 0));
 
     // Knights
-    board[0][1] = new Knight(0, std::make_pair(0, 1));
-    board[0][6] = new Knight(0, std::make_pair(0, 6));
+    board[1][0] = new Knight(0, std::make_pair(1, 0));
+    board[6][0] = new Knight(0, std::make_pair(6, 0));
 
     // Bishops
-    board[0][2] = new Bishop(0, std::make_pair(0, 2));
-    board[0][5] = new Bishop(0, std::make_pair(0, 5));
+    board[2][0] = new Bishop(0, std::make_pair(2, 0));
+    board[5][0] = new Bishop(0, std::make_pair(5, 0));
 
     // Queen
-    board[0][3] = new Queen(0, std::make_pair(0, 3));
+    board[3][0] = new Queen(0, std::make_pair(3, 0));
 
     // King
-    board[0][4] = new King(0, std::make_pair(0, 4));
+    board[4][0] = new King(0, std::make_pair(4, 0));
 
     // Initialize the black pieces
 
@@ -170,28 +171,27 @@ void Board::initializeBoard()
 
     for (int i = 0; i < 8; i++)
     {
-        board[6][i] = new Pawn(1, std::make_pair(6, i));
+        board[i][6] = new Pawn(1, std::make_pair(i, 6));
     }
 
     // Rooks
 
-    board[7][0] = new Rook(1, std::make_pair(7, 0));
+    board[0][7] = new Rook(1, std::make_pair(0, 7));
     board[7][7] = new Rook(1, std::make_pair(7, 7));
 
     // Knights
-
-    board[7][1] = new Knight(1, std::make_pair(7, 1));
-    board[7][6] = new Knight(1, std::make_pair(7, 6));
+    board[1][7] = new Knight(1, std::make_pair(1, 7));
+    board[6][7] = new Knight(1, std::make_pair(6, 7));
 
     // Bishops
-    board[7][2] = new Bishop(1, std::make_pair(7, 2));
-    board[7][5] = new Bishop(1, std::make_pair(7, 5));
+    board[2][7] = new Bishop(1, std::make_pair(2, 7));
+    board[5][7] = new Bishop(1, std::make_pair(5, 7));
 
     // Queen
-    board[7][3] = new Queen(1, std::make_pair(7, 3));
+    board[3][7] = new Queen(1, std::make_pair(3, 7));
 
     // King
-    board[7][4] = new King(1, std::make_pair(7, 4));
+    board[4][7] = new King(1, std::make_pair(4, 7));
 }
 
 /**
@@ -212,7 +212,7 @@ void Board::printBoard()
 
         for (int j = 0; j < 8; j++)
         {
-            std::cout << board[i][j]->getSymbol() << " | ";
+            std::cout << board[j][i]->getSymbol() << " | ";
         }
 
         std::cout << std::endl;
@@ -238,7 +238,7 @@ void Board::boardInfo()
         for (int j = 0; j < 8; j++)
         {
             std::cout << "Position: " << "(" << i << ", " << j << ")" << std::endl;
-            board[i][j]->showPieceInfo();
+            board[j][i]->showPieceInfo();
             std::cout << std::endl;
         }
         
@@ -257,18 +257,19 @@ void Board::boardInfo()
 
 bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
 {
+
     // Get row and column of the initial position
-    int iRow = initialPosition.first;
-    int iColumn = initialPosition.second;
+    int xInitial = initialPosition.first;
+    int yInitial = initialPosition.second;
 
     // Get row and column of the final position
 
-    int fRow = finalPosition.first;
-    int fColumn = finalPosition.second;
+    int xFinal = finalPosition.first;
+    int yFinal = finalPosition.second;
 
     // Check if the initial position is valid
 
-    if (iRow < 0 || iRow > 7 || iColumn < 0 || iColumn > 7)
+    if (xInitial < 0 || xInitial > 7 || yInitial < 0 || yInitial > 7)
     {
         std::cout << "Invalid initial position" << std::endl;
         return false;
@@ -276,7 +277,7 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
 
     // Check if the final position is valid
 
-    if (fRow < 0 || fRow > 7 || fColumn < 0 || fColumn > 7)
+    if (xFinal < 0 || xFinal > 7 || yFinal < 0 || yFinal > 7)
     {
         std::cout << "Invalid final position" << std::endl;
         return false;
@@ -284,7 +285,7 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
 
     // Check if the initial position is empty
 
-    if (board[iRow][iColumn]->getSymbol() == " ")
+    if (board[xInitial][yInitial]->getSymbol() == " ")
     {
         std::cout << "Initial position is empty" << std::endl;
         return false;
@@ -292,35 +293,64 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
 
     // Check if the final position is empty
 
-    if (board[fRow][fColumn]->getSymbol() != " ")
+    if (board[xFinal][yFinal]->getSymbol() != " ")
     {
         std::cout << "Final position is not empty" << std::endl;
         return false;
     }
 
-    // Check if the movement is valid
+    // Check if the piece can move to the final position
 
-    if (!board[iRow][iColumn]->isValidMove(finalPosition))
+    if (!board[xInitial][yInitial]->isValidMove(finalPosition))
     {
-        std::cout << "Invalid movement" << std::endl;
+        std::cout << "Invalid move" << std::endl;
         return false;
     }
 
     // Update the position of the piece
-
-    board[iRow][iColumn]->setPosition(finalPosition);
+    board[xInitial][yInitial]->setPosition(finalPosition);
 
     // Update the board
-
-    board[fRow][fColumn] = board[iRow][iColumn];
-    board[iRow][iColumn] = new Piece();
-
-    // Update the turn
-
-    turn = (turn + 1) % 2;
+    board[xFinal][yFinal] = board[xInitial][yInitial];
+    board[xInitial][yInitial] = new Piece();
 
     return true;
 
 }
+
+/**
+ * @brief Get the piece in the given position
+ * 
+ * @param position 
+ */
+
+void Board::getPiece(std::pair<int, int> position)
+{
+    // Get row and column of the position
+
+    int row = position.first;
+    int column = position.second;
+
+    // Check if the position is valid
+
+    if (row < 0 || row > 7 || column < 0 || column > 7)
+    {
+        std::cout << "Invalid position" << std::endl;
+        return;
+    }
+
+    // Check if the position is empty
+
+    if (board[row][column]->getSymbol() == " ")
+    {
+        std::cout << "Position is empty" << std::endl;
+        return;
+    }
+
+    // Show the information of the piece
+
+    board[row][column]->showPieceInfo();
+}
+
 
 #endif

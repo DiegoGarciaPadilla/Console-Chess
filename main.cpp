@@ -31,12 +31,45 @@ int main()
     // Initialize board
     board.initializeBoard();
 
+    // Initialize variables
+    int initialX, initialY, finalX, finalY;
+
+    // Move pieces
+
+    for (int i = 0; i < 10; i++)
+    {
+        // Print board
+        board.printBoard();
+
+        // Get initial position
+        std::cout << "Initial X position: ";
+        std::cin >> initialX;
+
+        std::cout << "Initial Y position: ";
+        std::cin >> initialY;
+
+        // Get final position
+        std::cout << "Final X position: ";
+        std::cin >> finalX;
+
+        std::cout << "Final Y position: ";
+        std::cin >> finalY;
+
+        std::pair <int, int> initialPosition = std::make_pair(initialX, initialY);
+        std::pair <int, int> finalPosition = std::make_pair(finalX, finalY);
+
+        // Move piece
+        board.movePiece(initialPosition, finalPosition);
+    }
+
     // Print board
     board.printBoard();
 
     // Pause
     system("pause");
 
-    // Delete board
+    // Destroy board
     board.~Board();
+
+    return 0;
 }

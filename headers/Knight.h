@@ -87,20 +87,27 @@ void Knight::showPieceInfo()
 
 bool Knight::isValidMove(std::pair<int, int> positionToMove)
 {
-    int currentRow = position.first;
-    int currentCol = position.second;
-    int targetRow = positionToMove.first;
-    int targetCol = positionToMove.second;
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
 
-    int rowDiff = abs(targetRow - currentRow);
-    int colDiff = abs(targetCol - currentCol);
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
 
-    // A Knight moves in an "L" shape: two squares in one direction and one in the other.
-    if ((rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)) {
-        return true;
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the knight doesn't move in L shape
+    if (!((abs(xDifference) == 2 && abs(yDifference) == 1) || (abs(xDifference) == 1 && abs(yDifference) == 2)))
+    {
+        std::cout << "The knight can't move like that" << std::endl;
+        return false;
     }
 
-    return false;
+    // If the move is in L shape, return true
+    return true;
 }
 
 #endif

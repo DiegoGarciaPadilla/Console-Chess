@@ -88,25 +88,28 @@ void Queen::showPieceInfo()
 
 bool Queen::isValidMove(std::pair<int, int> positionToMove)
 {
-    // Check if the move is diagonal
-    if (abs(positionToMove.first - position.first) == abs(positionToMove.second - position.second))
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
+
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
+
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the move is not diagonal, horizontal or vertical
+    if (xDifference != yDifference && xDifference != 0 && yDifference != 0)
     {
-        return true;
-    }
-    // Check if the move is horizontal
-    else if (positionToMove.first == position.first)
-    {
-        return true;
-    }
-    // Check if the move is vertical
-    else if (positionToMove.second == position.second)
-    {
-        return true;
-    }
-    else
-    {
+        std::cout << "The queen only moves diagonally, horizontally or vertically" << std::endl;
         return false;
     }
+
+    // If the move is diagonal, horizontal or vertical, return true
+    return true;
+
 }
 
 #endif

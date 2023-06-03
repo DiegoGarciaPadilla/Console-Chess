@@ -87,21 +87,28 @@ void Bishop::showPieceInfo()
  * @return false 
  */
 
-bool Bishop::isValidMove(std::pair<int, int> positionToMove) {
-    int currentRow = position.first;
-    int currentCol = position.second;
-    int targetRow = positionToMove.first;
-    int targetCol = positionToMove.second;
+bool Bishop::isValidMove(std::pair<int, int> positionToMove) 
+{
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
 
-    int rowDiff = abs(targetRow - currentRow);
-    int colDiff = abs(targetCol - currentCol);
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
 
-    // The bishop moves diagonally, so the difference in rows must be equal to the difference in columns.
-    if (rowDiff == colDiff) {
-        return true;
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the move is not diagonal
+    if (abs(xDifference) != abs(yDifference))
+    {
+        return false;
     }
 
-    return false;
+    // If the move is diagonal, is valid
+    return true;
 }
 
 #endif

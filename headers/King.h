@@ -86,21 +86,29 @@ void King::showPieceInfo()
     std::cout << "Is captured: " << isCaptured << std::endl;
 }
 
-bool King::isValidMove(std::pair<int, int> positionToMove) {
-    int currentRow = position.first;
-    int currentCol = position.second;
-    int targetRow = positionToMove.first;
-    int targetCol = positionToMove.second;
+bool King::isValidMove(std::pair<int, int> positionToMove) 
+{
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
 
-    int rowDiff = abs(targetRow - currentRow);
-    int colDiff = abs(targetCol - currentCol);
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
 
-    // The King can move in any direction, but only one square at a time.
-    if ((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1) || (rowDiff == 1 && colDiff == 1)) {
-        return true;
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the move is valid
+    if (abs(xDifference) > 1 && abs(yDifference) > 1)
+    {
+        std::cout << "The king can only move one space at a time" << std::endl;
+        return false;
     }
-
-    return false;
+    
+    // Move is valid
+    return true;
 }
 
 #endif

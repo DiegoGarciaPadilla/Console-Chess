@@ -23,6 +23,7 @@ private:
     // Attributes
     std::string name = "Pawn"; // Name of the piece
     std::string symbol = "P"; // P for pawn
+    bool isFirstMove = true; // True if it's the first move of the piece
 public:
     // Constructor
     Pawn();
@@ -51,12 +52,7 @@ public:
  * 
  */
 
-Pawn::Pawn()
-{
-    color = 0;
-    position = std::make_pair(0, 0);
-    isCaptured = false;
-}
+Pawn::Pawn() : Piece() {}
 
 /**
  * @brief Construct a new Pawn:: Pawn object
@@ -81,6 +77,7 @@ void Pawn::showPieceInfo()
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
     std::cout << "Is captured: " << isCaptured << std::endl;
+    std::cout << "Is first move: " << isFirstMove << std::endl;
 }
 
 /**
@@ -93,42 +90,57 @@ void Pawn::showPieceInfo()
 
 bool Pawn::isValidMove(std::pair<int, int> positionToMove)
 {
-    // Check if the Pawn is moving horizontally
-    if (position.first != positionToMove.first) 
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
+
+    // Get row and column of the position to move
+    int xFinal = positionToMove.first;
+    int yFinal = positionToMove.second;
+
+    // Get difference between initial and final position
+    int xDifference = xFinal - xInitial;
+    int yDifference = yFinal - yInitial;
+
+    // Check if the pawn is moving horizontally
+    if (xDifference != 0)
+    {
+        std::cout << "The pawn can't move horizontally" << std::endl;
+        return false;
+    }
+
+    // Check if the pawn is moving backwards
+    if (color == 0 && yDifference < 0)
+    {
+        std::cout << "The pawn can't move backwards" << std::endl;
+        return false;
+    }
+    else if (color == 1 && yDifference > 0)
     {
         return false;
     }
-    
-    if (color == 0) // White
+
+    // Check if the pawn is moving more than 2 spaces
+    if (abs(yDifference) > 2)
     {
-        if (position.second == positionToMove.second + 1)
-        {
-            return true;
-        }
-        else if (position.second == positionToMove.second + 2 && position.second == 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        std::cout << "The pawn can't move more than 2 spaces" << std::endl;
+        return false;
     }
-    else // Black
+
+    // Check if the pawn is moving more than 1 space after the first move
+    if (!isFirstMove && abs(yDifference) > 1)
     {
-        if (position.second == positionToMove.second - 1)
-        {
-            return true;
-        }
-        else if (position.second == positionToMove.second - 2 && position.second == 6)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        std::cout << "The pawn can't move more than 1 space after the first move" << std::endl;
+        return false;
     }
+
+    // Move is valid
+
+    // Set first move to false
+    isFirstMove = false;
+
+    return true;
+
 }
 
 
