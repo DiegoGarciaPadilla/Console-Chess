@@ -1,4 +1,4 @@
-# Console Chess
+# Console Chess ♟️
 
 Este repositorio contiene el diagrama UML del proyecto "Console Chess", un videojuego de ajedrez programado en C++ para ser jugado en la consola.
 
