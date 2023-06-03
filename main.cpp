@@ -69,7 +69,13 @@ int main()
         std::pair <int, int> finalPosition = std::make_pair(finalX, finalY);
 
         // Move piece
-        board.movePiece(initialPosition, finalPosition);
+        if (!board.movePiece(initialPosition, finalPosition))
+        {
+            system("pause");
+        }
+
+        // Clean screen
+        system("cls");
     }
 
     // Print board
