@@ -33,11 +33,9 @@ public:
     int getColor();
     std::string getSymbol();
     std::pair<int, int> getPosition();
-    bool getIsCaptured();
 
     // Setters
     void setPosition(std::pair<int, int> position);
-    void setIsCaptured(bool isCaptured);
 
     // Methods
     bool isValidMove(std::pair<int, int> positionToMove, Board &board);

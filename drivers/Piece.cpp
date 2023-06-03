@@ -91,18 +91,6 @@ std::pair<int, int> Piece::getPosition()
     return this->position;
 }
 
-/**
- * @brief Get the Is Captured object
- *
- * @return true
- * @return false
- */
-
-bool Piece::getIsCaptured()
-{
-    return this->isCaptured;
-}
-
 // Setters
 
 /**
@@ -114,17 +102,6 @@ bool Piece::getIsCaptured()
 void Piece::setPosition(std::pair<int, int> position)
 {
     this->position = position;
-}
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void Piece::setIsCaptured(bool isCaptured)
-{
-    this->isCaptured = isCaptured;
 }
 
 // Methods

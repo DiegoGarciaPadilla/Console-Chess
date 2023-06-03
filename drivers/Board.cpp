@@ -39,7 +39,7 @@ Board::Board()
     {
         for (int j = 0; j < 8; j++)
         {
-            board[i][j] = new Piece();
+            board[i][j] = nullptr;
         }
     }
 
@@ -254,6 +254,24 @@ void Board::printBoard()
             std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
         }
     }
+
+    // Print captured pieces
+
+    std::cout << "Captured pieces : " << std::endl;
+
+    std::cout << "White: ";
+    for (int i = 0; i < whiteCapturedPieces.size(); i++)
+    {
+        std::cout << whiteCapturedPieces[i]->getSymbol() << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "Black: ";
+    for (int i = 0; i < blackCapturedPieces.size(); i++)
+    {
+        std::cout << blackCapturedPieces[i]->getSymbol() << " ";
+    }
+    std::cout << std::endl;
 }
 
 /**
@@ -301,15 +319,16 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
         return false;
     }
 
-    // Check if the final position is empty
+    // Check if the final position is empty or has an enemy piece
 
-    if (board[xFinal][yFinal] != nullptr)
+    if (board[xFinal][yFinal] != nullptr && board[xFinal][yFinal]->getColor() == turn)
     {
-        std::cout << "Final position is not empty" << std::endl;
+        std::cout << "You cannot capture your own piece" << std::endl;
         return false;
     }
 
     // Check if the piece belongs to the player
+
     if (board[xInitial][yInitial]->getColor() != turn)
     {
         std::cout << "Piece does not belong to the player" << std::endl;
@@ -317,6 +336,7 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     }
 
     // Check if the piece moves to a different position
+
     if (xInitial == xFinal && yInitial == yFinal)
     {
         std::cout << "Piece does not move" << std::endl;
@@ -332,14 +352,47 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     }
 
     // Update the position of the piece
+
     board[xInitial][yInitial]->setPosition(finalPosition);
 
     // Update the board
+
     board[xFinal][yFinal] = board[xInitial][yInitial];
     board[xInitial][yInitial] = nullptr;
 
     // Update the turn
+
     turn = (turn + 1) % 2;
+
+    return true;
+}
+
+/**
+ * @brief Capture a piece
+ *
+ * @param position
+ * @return true
+ * @return false
+ */
+
+bool Board::capturePiece(std::pair<int, int> position)
+{
+    // Get row and column of the position
+    int x = position.first;
+    int y = position.second;
+
+    // We assume that the position is valid and that there is a piece in the position
+
+    // Add the piece to the captured pieces
+    if (turn == 0)
+    {
+        whiteCapturedPieces.push_back(board[x][y]);
+    }
+
+    else
+    {
+        blackCapturedPieces.push_back(board[x][y]);
+    }
 
     return true;
 }

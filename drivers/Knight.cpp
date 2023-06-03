@@ -70,15 +70,6 @@ std::string Knight::getSymbol() { return symbol; }
 
 std::pair<int, int> Knight::getPosition() { return position; }
 
-/**
- * @brief Get the Is Captured object
- *
- * @return true
- * @return false
- */
-
-bool Knight::getIsCaptured() { return isCaptured; }
-
 // Setters
 
 /**
@@ -88,14 +79,6 @@ bool Knight::getIsCaptured() { return isCaptured; }
  */
 
 void Knight::setPosition(std::pair<int, int> position) { this->position = position; }
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void Knight::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
 
@@ -126,6 +109,12 @@ bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
     {
         std::cout << "The knight can't move like that" << std::endl;
         return false;
+    }
+
+    // Capture piece if there is one
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    {
+        board.capturePiece(positionToMove);
     }
 
     // If the move is in L shape, return true

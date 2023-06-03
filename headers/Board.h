@@ -25,6 +25,10 @@ private:
     // Attributes
     Piece *board[8][8];
     int turn = 0; // 0 = white, 1 = black
+
+    // Captured pieces
+    std::vector<Piece *> whiteCapturedPieces; // Pieces captured by white
+    std::vector<Piece *> blackCapturedPieces; // Pieces captured by black
 public:
     // Constructor
     Board();
@@ -41,7 +45,10 @@ public:
     // Methods
     void initializeBoard();
     void printBoard();
+
     bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
+    bool capturePiece(std::pair<int, int> position);
+    
     Piece *getPiece(std::pair<int, int> position);
 };
 

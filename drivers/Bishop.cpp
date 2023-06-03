@@ -71,14 +71,6 @@ std::string Bishop::getSymbol() { return symbol; };
 
 std::pair<int, int> Bishop::getPosition() { return position; };
 
-/**
- * @brief Get the Is Captured object
- *
- * @return bool
- */
-
-bool Bishop::getIsCaptured() { return isCaptured; };
-
 // Setters
 
 /**
@@ -88,14 +80,6 @@ bool Bishop::getIsCaptured() { return isCaptured; };
  */
 
 void Bishop::setPosition(std::pair<int, int> position) { this->position = position; };
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void Bishop::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
 
 // Methods
 
@@ -179,6 +163,12 @@ bool Bishop::isValidMove(std::pair<int, int> positionToMove, Board &board)
                 return false;
             }
         }
+    }
+
+    // Capture piece if there is one
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    {
+        board.capturePiece(positionToMove);
     }
 
     // If the bishop is moving diagonally and there are no pieces in the way, the move is valid

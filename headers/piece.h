@@ -28,8 +28,6 @@ protected:
     std::string symbol = " "; // Symbol to print on the board
 
     std::pair<int, int> position; // (x, y)
-    bool isCaptured = false;      // true = captured, false = not captured
-
 public:
     // Constructor
     Piece();
@@ -40,11 +38,9 @@ public:
     virtual int getColor();
     virtual std::string getSymbol();
     virtual std::pair<int, int> getPosition();
-    virtual bool getIsCaptured();
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
     virtual void setPosition(std::pair<int, int> position);
-    virtual void setIsCaptured(bool isCaptured);
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int> positionToMove, Board &board);

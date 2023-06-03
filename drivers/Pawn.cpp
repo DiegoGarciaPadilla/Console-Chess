@@ -71,15 +71,6 @@ std::string Pawn::getSymbol() { return symbol; }
 
 std::pair<int, int> Pawn::getPosition() { return position; }
 
-/**
- * @brief Get the Is Captured object
- *
- * @return true
- * @return false
- */
-
-bool Pawn::getIsCaptured() { return isCaptured; }
-
 // Setters
 
 /**
@@ -89,14 +80,6 @@ bool Pawn::getIsCaptured() { return isCaptured; }
  */
 
 void Pawn::setPosition(std::pair<int, int> position) { this->position = position; }
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void Pawn::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
 
@@ -123,7 +106,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     int yDifference = yFinal - yInitial;
 
     // Check if the pawn is moving horizontally
-    if (xDifference != 0)
+    if (abs(xDifference) > 1)
     {
         std::cout << "The pawn can't move horizontally" << std::endl;
         return false;
@@ -154,11 +137,29 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
-    // Move is valid
+    // Check if the pawn is moving diagonally more than 1 space
+    if (abs(yDifference) == abs(xDifference) && abs(yDifference) > 1)
+    {
+        std::cout << "The pawn can't move like a bishop" << std::endl;
+        return false;
+    }
+    // Check if the pawn is moving diagonally without capturing
+    else if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && board.getPiece(std::make_pair(xFinal, yFinal)) == nullptr)
+    {
+        std::cout << "The pawn can't move diagonally without capturing" << std::endl;
+        return false;
+    }
+
+    // Check if the pawn can capture a piece (normal capture)
+    if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && board.getPiece(std::make_pair(xFinal, yFinal)) != nullptr)
+    {
+        board.capturePiece(std::make_pair(xFinal, yFinal));
+    }
 
     // Set first move to false
     isFirstMove = false;
 
+    // Return true if the move is valid
     return true;
 }
 

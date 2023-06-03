@@ -71,15 +71,6 @@ std::string King::getSymbol() { return symbol; };
 
 std::pair<int, int> King::getPosition() { return position; };
 
-/**
- * @brief Get the Is Captured object
- *
- * @return true
- * @return false
- */
-
-bool King::getIsCaptured() { return isCaptured; };
-
 // Setters
 
 /**
@@ -89,14 +80,6 @@ bool King::getIsCaptured() { return isCaptured; };
  */
 
 void King::setPosition(std::pair<int, int> position) { this->position = position; };
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void King::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
 
 // Methods
 
@@ -127,6 +110,12 @@ bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
     {
         std::cout << "The king can only move one space at a time" << std::endl;
         return false;
+    }
+
+    // Capture piece if there is one
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    {
+        board.capturePiece(positionToMove);
     }
 
     // Move is valid

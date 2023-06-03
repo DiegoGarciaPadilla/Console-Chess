@@ -71,15 +71,6 @@ std::string Queen::getSymbol() { return symbol; }
 
 std::pair<int, int> Queen::getPosition() { return position; }
 
-/**
- * @brief Get the Is Captured object
- *
- * @return true
- * @return false
- */
-
-bool Queen::getIsCaptured() { return isCaptured; }
-
 // Setters
 
 /**
@@ -89,14 +80,6 @@ bool Queen::getIsCaptured() { return isCaptured; }
  */
 
 void Queen::setPosition(std::pair<int, int> position) { this->position = position; }
-
-/**
- * @brief Set the Is Captured object
- *
- * @param isCaptured
- */
-
-void Queen::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
 
@@ -224,6 +207,12 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
                 }
             }
         }
+    }
+
+    // Capture piece if there is one
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    {
+        board.capturePiece(positionToMove);
     }
 
     // If the move is diagonal, horizontal or vertical, and there are no pieces in the way, the move is valid
