@@ -202,25 +202,49 @@ void Board::initializeBoard()
 void Board::printBoard()
 {
 
-    // Print the board oriented to the white player
-
-    std::cout << "  -------------------------------" << std::endl;
-
-    for (int i = 7; i >= 0; i--)
+    // Print the board for the white player
+    if (turn == 0)
     {
-        std::cout << i << " | ";
+        std::cout << "  -------------------------------" << std::endl;
 
-        for (int j = 0; j < 8; j++)
+        for (int i = 7; i >= 0; i--)
         {
-            std::cout << board[j][i]->getSymbol() << " | ";
+            std::cout << i << " | ";
+
+            for (int j = 0; j < 8; j++)
+            {
+                std::cout << board[j][i]->getSymbol() << " | ";
+            }
+
+            std::cout << std::endl;
+            std::cout << "  -------------------------------" << std::endl;
         }
 
-        std::cout << std::endl;
-        std::cout << "  -------------------------------" << std::endl;
+        std::cout << "    0   1   2   3   4   5   6   7" << std::endl;
     }
 
-    std::cout << "    0   1   2   3   4   5   6   7" << std::endl;
+    // Print the board for the black player
+    else
+    {
+        {
+        std::cout << "  -------------------------------" << std::endl;
 
+        for (int i = 0; i < 8; i++)
+        {
+            std::cout << i << " | ";
+
+            for (int j = 7; j >= 0; j--)
+            {
+                std::cout << board[j][i]->getSymbol() << " | ";
+            }
+
+            std::cout << std::endl;
+            std::cout << "  -------------------------------" << std::endl;
+        }
+
+        std::cout << "    7   6   5   4   3   2   1   0" << std::endl;
+    }
+    }
 }
 
 /**
@@ -299,6 +323,13 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
         return false;
     }
 
+    // Check if the piece belongs to the player
+    if (board[xInitial][yInitial]->getColor() != turn)
+    {
+        std::cout << "Piece does not belong to the player" << std::endl;
+        return false;
+    }
+
     // Check if the piece can move to the final position
 
     if (!board[xInitial][yInitial]->isValidMove(finalPosition))
@@ -313,6 +344,9 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     // Update the board
     board[xFinal][yFinal] = board[xInitial][yInitial];
     board[xInitial][yInitial] = new Piece();
+
+    // Update the turn
+    turn = (turn + 1) % 2;
 
     return true;
 

@@ -36,8 +36,18 @@ int main()
 
     // Move pieces
 
-    for (int i = 0; i < 10; i++)
+    while (true)
     {
+        // Print turn
+        if (board.getTurn() == 0)
+        {
+            std::cout << "White's turn" << std::endl;
+        }
+        else
+        {
+            std::cout << "Black's turn" << std::endl;
+        }
+
         // Print board
         board.printBoard();
 
