@@ -100,20 +100,6 @@ void Knight::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 // Methods
 
 /**
- * @brief Shows the piece's information
- *
- */
-
-void Knight::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
-}
-
-/**
  * @brief Checks if the move is valid
  *
  * @param positionToMove

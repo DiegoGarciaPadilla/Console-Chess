@@ -4,9 +4,9 @@
  * @brief Implementation of the Piece class
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef PIECE_CPP
@@ -142,21 +142,6 @@ bool Piece::isValidMove(std::pair<int, int> position, Board &board)
 {
     // This method will be implemented in the child classes by overriding it
     return true;
-}
-
-/**
- * @brief Show the piece information
- *
- * @return void
- */
-
-void Piece::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
 }
 
 #endif

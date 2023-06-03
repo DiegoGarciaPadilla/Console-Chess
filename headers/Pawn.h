@@ -41,7 +41,6 @@ public:
     void setIsCaptured(bool isCaptured);
 
     // Methods
-    void showPieceInfo();
     bool isValidMove(std::pair<int, int> positionToMove, Board &board);
 };
 

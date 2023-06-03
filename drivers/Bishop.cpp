@@ -1,12 +1,12 @@
 /**
  * @file Bishop.cpp
  * @author Diego Antonio García Padilla
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef BISHOP_CPP
@@ -98,20 +98,6 @@ void Bishop::setPosition(std::pair<int, int> position) { this->position = positi
 void Bishop::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
 
 // Methods
-
-/**
- * @brief Shows the piece's information
- *
- */
-
-void Bishop::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
-}
 
 /**
  * @brief Checks if the move is valid

@@ -4,9 +4,9 @@
  * @brief Implementation of the Board class
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef BOARD_CPP
@@ -18,12 +18,12 @@
 #include <string>
 
 #include "../headers/Board.h" // Header file
-#include "Bishop.cpp"          // Bishop class
-#include "King.cpp"            // King class
-#include "Knight.cpp"          // Knight class
-#include "Pawn.cpp"            // Pawn class
-#include "Queen.cpp"           // Queen class
-#include "Rook.cpp"            // Rook class
+#include "Bishop.cpp"         // Bishop class
+#include "King.cpp"           // King class
+#include "Knight.cpp"         // Knight class
+#include "Pawn.cpp"           // Pawn class
+#include "Queen.cpp"          // Queen class
+#include "Rook.cpp"           // Rook class
 
 // Constructor
 
@@ -253,38 +253,6 @@ void Board::printBoard()
 
             std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
         }
-    }
-}
-
-/**
- * @brief Print the board with the information of the pieces
- *
- */
-
-void Board::boardInfo()
-{
-    for (int i = 0; i < 8; i++)
-    {
-        std::cout << "Row: " << i << std::endl;
-        std::cout << std::endl;
-
-        for (int j = 0; j < 8; j++)
-        {
-            std::cout << "Position: "
-                      << "(" << i << ", " << j << ")" << std::endl;
-
-            if (board[j][i] == nullptr)
-            {
-                std::cout << "No piece in this position" << std::endl;
-            }
-            else
-            {
-                board[j][i]->showPieceInfo();
-            }
-            std::cout << std::endl;
-        }
-
-        std::cout << std::endl;
     }
 }
 

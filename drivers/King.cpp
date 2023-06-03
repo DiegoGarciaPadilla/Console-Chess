@@ -4,9 +4,9 @@
  * @brief Implementation of the King class
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef KING_CPP
@@ -107,20 +107,6 @@ void King::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; };
  * @return true
  * @return false
  */
-
-/**
- * @brief Shows the piece's information
- *
- */
-
-void King::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
-}
 
 bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
 {

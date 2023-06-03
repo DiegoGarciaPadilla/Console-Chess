@@ -4,9 +4,9 @@
  * @brief Implementation of the Pawn class
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef PAWN_CPP
@@ -99,21 +99,6 @@ void Pawn::setPosition(std::pair<int, int> position) { this->position = position
 void Pawn::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
-
-/**
- * @brief Shows the piece's information
- *
- */
-
-void Pawn::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
-    std::cout << "Is first move: " << isFirstMove << std::endl;
-}
 
 /**
  * @brief Checks if the move is valid

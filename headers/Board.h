@@ -40,10 +40,7 @@ public:
 
     // Methods
     void initializeBoard();
-
     void printBoard();
-    void boardInfo();
-
     bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
     Piece *getPiece(std::pair<int, int> position);
 };

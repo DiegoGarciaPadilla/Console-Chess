@@ -4,9 +4,9 @@
  * @brief Implementation of the Queen class
  * @version 0.1
  * @date 2023-06-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef QUEEN_CPP
@@ -17,7 +17,7 @@
 #include <string>
 
 #include "../headers/Queen.h" // Header file
-#include "Board.cpp"           // Board class
+#include "Board.cpp"          // Board class
 
 // Constructor
 
@@ -99,20 +99,6 @@ void Queen::setPosition(std::pair<int, int> position) { this->position = positio
 void Queen::setIsCaptured(bool isCaptured) { this->isCaptured = isCaptured; }
 
 // Methods
-
-/**
- * @brief Shows the piece's information
- *
- */
-
-void Queen::showPieceInfo()
-{
-    std::cout << "Piece: " << name << std::endl;
-    std::cout << "Symbol: " << symbol << std::endl;
-    std::cout << "Color: " << color << std::endl;
-    std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
-    std::cout << "Is captured: " << isCaptured << std::endl;
-}
 
 /**
  * @brief Checks if the move is valid
