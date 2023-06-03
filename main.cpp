@@ -14,8 +14,9 @@
 #include <string>
 #include <utility>
 
-#include "headers/Piece.h" // Parent class
-#include "headers/Board.h" // Board class
+#include "drivers/Piece.cpp" // Parent class
+#include "drivers/Board.cpp" // Board class
+
 
 int main()
 {
