@@ -47,8 +47,6 @@ public:
     // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int> positionToMove);
     virtual void showPieceInfo();
-
-    bool move(std::pair<int, int> position);
 };
 
 // Constructor
@@ -188,27 +186,6 @@ void Piece::showPieceInfo()
     std::cout << "Color: " << color << std::endl;
     std::cout << "Position: (" << position.first << ", " << position.second << ")" << std::endl;
     std::cout << "Is captured: " << isCaptured << std::endl;
-}
-
-/**
- * @brief Move the piece to the new position
- * 
- * @param position 
- * @return true 
- * @return false 
- */
-
-bool Piece::move(std::pair<int, int> position)
-{
-    if (isValidMove(position))
-    {
-        this->position = position;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 #endif

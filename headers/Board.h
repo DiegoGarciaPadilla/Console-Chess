@@ -48,6 +48,8 @@ public:
     void initializeBoard();
     void printBoard();
     void boardInfo();
+
+    bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
 };
 
 // Constructor
@@ -237,6 +239,83 @@ void Board::boardInfo()
         
         std::cout << std::endl;
     }
+}
+
+/**
+ * @brief Move a piece from an initial position to a final position
+ * 
+ * @param initialPosition 
+ * @param finalPosition 
+ * @return true 
+ * @return false 
+ */
+
+bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+{
+    // Get row and column of the initial position
+    int iRow = initialPosition.first;
+    int iColumn = initialPosition.second;
+
+    // Get row and column of the final position
+
+    int fRow = finalPosition.first;
+    int fColumn = finalPosition.second;
+
+    // Check if the initial position is valid
+
+    if (iRow < 0 || iRow > 7 || iColumn < 0 || iColumn > 7)
+    {
+        std::cout << "Invalid initial position" << std::endl;
+        return false;
+    }
+
+    // Check if the final position is valid
+
+    if (fRow < 0 || fRow > 7 || fColumn < 0 || fColumn > 7)
+    {
+        std::cout << "Invalid final position" << std::endl;
+        return false;
+    }
+
+    // Check if the initial position is empty
+
+    if (board[iRow][iColumn]->getSymbol() == " ")
+    {
+        std::cout << "Initial position is empty" << std::endl;
+        return false;
+    }
+
+    // Check if the final position is empty
+
+    if (board[fRow][fColumn]->getSymbol() != " ")
+    {
+        std::cout << "Final position is not empty" << std::endl;
+        return false;
+    }
+
+    // Check if the movement is valid
+
+    if (!board[iRow][iColumn]->isValidMove(finalPosition))
+    {
+        std::cout << "Invalid movement" << std::endl;
+        return false;
+    }
+
+    // Update the position of the piece
+
+    board[iRow][iColumn]->setPosition(finalPosition);
+
+    // Update the board
+
+    board[fRow][fColumn] = board[iRow][iColumn];
+    board[iRow][iColumn] = new Piece();
+
+    // Update the turn
+
+    turn = (turn + 1) % 2;
+
+    return true;
+
 }
 
 #endif
