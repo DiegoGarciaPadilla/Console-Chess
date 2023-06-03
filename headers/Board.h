@@ -205,7 +205,7 @@ void Board::printBoard()
     // Print the board for the white player
     if (turn == 0)
     {
-        std::cout << "  -------------------------------" << std::endl;
+        std::cout << "  -----------------------------------------" << std::endl;
 
         for (int i = 7; i >= 0; i--)
         {
@@ -213,21 +213,37 @@ void Board::printBoard()
 
             for (int j = 0; j < 8; j++)
             {
-                std::cout << board[j][i]->getSymbol() << " | ";
+                if (board[j][i]->getSymbol() == " ")
+                {
+                    std::cout << "  " << " | ";
+                }
+
+                else
+                {
+                    if (board[j][i]->getColor() == 0)
+                    {
+                        std::cout << board[j][i]->getSymbol() << "w" << " | ";
+                    }
+
+                    else
+                    {
+                        std::cout << board[j][i]->getSymbol() << "b" << " | ";
+                    }
+                }
             }
 
             std::cout << std::endl;
-            std::cout << "  -------------------------------" << std::endl;
+            std::cout << "  -----------------------------------------" << std::endl;
         }
 
-        std::cout << "    0   1   2   3   4   5   6   7" << std::endl;
+        std::cout << "    0    1    2    3    4    5    6    7" << std::endl;
     }
 
     // Print the board for the black player
     else
     {
         {
-        std::cout << "  -------------------------------" << std::endl;
+        std::cout << "  -----------------------------------------" << std::endl;
 
         for (int i = 0; i < 8; i++)
         {
@@ -235,14 +251,30 @@ void Board::printBoard()
 
             for (int j = 7; j >= 0; j--)
             {
-                std::cout << board[j][i]->getSymbol() << " | ";
+                if (board[j][i]->getSymbol() == " ")
+                {
+                    std::cout << "  " << " | ";
+                }
+
+                else
+                {
+                    if (board[j][i]->getColor() == 0)
+                    {
+                        std::cout << board[j][i]->getSymbol() << "w" << " | ";
+                    }
+
+                    else
+                    {
+                        std::cout << board[j][i]->getSymbol() << "b" << " | ";
+                    }
+                }
             }
 
             std::cout << std::endl;
-            std::cout << "  -------------------------------" << std::endl;
+            std::cout << "  -----------------------------------------" << std::endl;
         }
 
-        std::cout << "    7   6   5   4   3   2   1   0" << std::endl;
+        std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
     }
     }
 }
