@@ -178,7 +178,17 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
     // Capture piece if there is one
     if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
     {
-        board.capturePiece(positionToMove);
+        // Check if is the king
+        if (board.getPiece(positionToMove)->getName() == "King")
+        {
+            std::cout << "You can't capture the king" << std::endl;
+            return false;
+        }
+        // If it's not the king, capture the piece
+        else
+        {
+            board.capturePiece(positionToMove);
+        }
     }
 
     // If the move is horizontal or vertical, it's valid
