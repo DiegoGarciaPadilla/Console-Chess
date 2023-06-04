@@ -106,7 +106,7 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
     int yDifference = yFinal - yInitial;
 
     // Check if the move is not diagonal, horizontal or vertical
-    if (xDifference != yDifference && xDifference != 0 && yDifference != 0)
+    if (abs(xDifference) != abs(yDifference) && xDifference != 0 && yDifference != 0)
     {
         std::cout << "The queen only moves diagonally, horizontally or vertically" << std::endl;
         return false;
