@@ -104,27 +104,22 @@ bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
     int xDifference = xFinal - xInitial;
     int yDifference = yFinal - yInitial;
 
+    // Check if the move is not to the same position
+    if (xDifference == 0 && yDifference == 0)
+    {
+        return false;
+    }
+
     // Check if the knight doesn't move in L shape
     if (!((abs(xDifference) == 2 && abs(yDifference) == 1) || (abs(xDifference) == 1 && abs(yDifference) == 2)))
     {
-        std::cout << "The knight can't move like that" << std::endl;
         return false;
     }
 
     // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
     {
-        // Check if is the king
-        if (board.getPiece(positionToMove)->getName() == "King")
-        {
-            std::cout << "You can't capture the king" << std::endl;
-            return false;
-        }
-        // If it's not the king, capture the piece
-        else
-        {
-            board.capturePiece(positionToMove);
-        }
+        board.capturePiece(positionToMove);
     }
 
     // If the move is in L shape, return true

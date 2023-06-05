@@ -172,6 +172,22 @@ void Board::initializeBoard()
 
 void Board::printBoard()
 {
+    // Print turn
+    if (turn == 0)
+    {
+        std::cout << "White's turn" << std::endl;
+    }
+    else
+    {
+        std::cout << "Black's turn" << std::endl;
+    }
+
+    // Print a message if the king is in check
+    if (isCheck())
+    {
+        std::cout << "Your King is in check!" << std::endl;
+    }
+    std::cout << std::endl;
 
     // Print the board for the white player
     if (turn == 0)
@@ -254,6 +270,7 @@ void Board::printBoard()
             std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
         }
     }
+    std::cout << std::endl;
 
     // Print captured pieces
 
@@ -351,6 +368,13 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
         return false;
     }
 
+    // Check if there is a king in the final position
+    if (board[xFinal][yFinal] != nullptr && board[xFinal][yFinal]->getName() == "K")
+    {
+        std::cout << "The king cannot be captured" << std::endl;
+        return false;
+    }
+
     // Update the position of the piece
 
     board[xInitial][yInitial]->setPosition(finalPosition);
@@ -395,6 +419,60 @@ bool Board::capturePiece(std::pair<int, int> position)
     }
 
     return true;
+}
+
+/**
+ * @brief Check if the king of the current player is in check
+ *
+ * @return true
+ */
+
+bool Board::isCheck()
+{
+    // Initialize the position of the king
+    std::pair<int, int> kingPosition;
+
+    // Get the position of the king
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != nullptr && board[i][j]->getColor() == turn && board[i][j]->getName() == "King")
+            {
+                kingPosition = board[i][j]->getPosition();
+            }
+        }
+    }
+
+    // Check if the king is in check
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != nullptr)
+            {
+                if (board[i][j]->getColor() != turn && board[i][j]->isValidMove(kingPosition, *this))
+                {
+                    std::cout << "Check by ";
+
+                    if (board[i][j]->getColor() == 0)
+                    {
+                        std::cout << "white ";
+                    }
+                    else
+                    {
+                        std::cout << "black ";
+                    }
+
+                    std::cout << board[i][j]->getName() << std::endl;
+                    return true;
+                }
+            }
+        }
+    }
+
+    // Else, the king is not in check
+    return false;
 }
 
 /**

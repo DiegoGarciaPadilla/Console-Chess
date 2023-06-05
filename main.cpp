@@ -33,18 +33,11 @@ int main()
 
     while (true)
     {
-        // Print turn
-        if (board.getTurn() == 0)
-        {
-            std::cout << "White's turn" << std::endl;
-        }
-        else
-        {
-            std::cout << "Black's turn" << std::endl;
-        }
-
         // Print board
         board.printBoard();
+
+        // Message
+        std::cout << "Make a move!" << std::endl;
 
         // Get initial position
         std::cout << "Initial X position: ";

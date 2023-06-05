@@ -48,6 +48,7 @@ public:
 
     bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
     bool capturePiece(std::pair<int, int> position);
+    bool isCheck();
     
     Piece *getPiece(std::pair<int, int> position);
 };

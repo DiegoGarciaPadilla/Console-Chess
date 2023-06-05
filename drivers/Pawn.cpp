@@ -105,17 +105,21 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     int xDifference = xFinal - xInitial;
     int yDifference = yFinal - yInitial;
 
+    // Check if the move is not to the same position
+    if (xDifference == 0 && yDifference == 0)
+    {
+        return false;
+    }
+
     // Check if the pawn is moving horizontally
     if (abs(xDifference) > 1)
     {
-        std::cout << "The pawn can't move horizontally" << std::endl;
         return false;
     }
 
     // Check if the pawn is moving backwards
     if (color == 0 && yDifference < 0)
     {
-        std::cout << "The pawn can't move backwards" << std::endl;
         return false;
     }
     else if (color == 1 && yDifference > 0)
@@ -126,44 +130,30 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     // Check if the pawn is moving more than 2 spaces
     if (abs(yDifference) > 2)
     {
-        std::cout << "The pawn can't move more than 2 spaces" << std::endl;
         return false;
     }
 
     // Check if the pawn is moving more than 1 space after the first move
     if (!isFirstMove && abs(yDifference) > 1)
     {
-        std::cout << "The pawn can't move more than 1 space after the first move" << std::endl;
         return false;
     }
 
     // Check if the pawn is moving diagonally more than 1 space
     if (abs(yDifference) == abs(xDifference) && abs(yDifference) > 1)
     {
-        std::cout << "The pawn can't move like a bishop" << std::endl;
         return false;
     }
     // Check if the pawn is moving diagonally without capturing
     else if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && board.getPiece(std::make_pair(xFinal, yFinal)) == nullptr)
     {
-        std::cout << "The pawn can't move diagonally without capturing" << std::endl;
         return false;
     }
 
     // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
     {
-        // Check if is the king
-        if (board.getPiece(positionToMove)->getName() == "King")
-        {
-            std::cout << "You can't capture the king" << std::endl;
-            return false;
-        }
-        // If it's not the king, capture the piece
-        else
-        {
-            board.capturePiece(positionToMove);
-        }
+        board.capturePiece(positionToMove);
     }
 
     // Set first move to false

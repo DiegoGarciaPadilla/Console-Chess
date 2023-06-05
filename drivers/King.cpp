@@ -105,15 +105,20 @@ bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
     int xDifference = xFinal - xInitial;
     int yDifference = yFinal - yInitial;
 
-    // Check if the move is valid
-    if (abs(xDifference) > 1 && abs(yDifference) > 1)
+    // Check if the move is not to the same position
+    if (xDifference == 0 && yDifference == 0)
     {
-        std::cout << "The king can only move one space at a time" << std::endl;
+        return false;
+    }
+
+    // Check if the move is valid
+    if (abs(xDifference) > 1 || abs(yDifference) > 1)
+    {
         return false;
     }
 
     // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color)
+    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
     {
         board.capturePiece(positionToMove);
     }
