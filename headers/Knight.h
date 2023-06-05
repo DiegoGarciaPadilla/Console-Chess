@@ -33,6 +33,7 @@ public:
     int getColor();
     std::string getSymbol();
     std::pair<int, int> getPosition();
+    bool getHasMoved();
 
     // Setters
     void setPosition(std::pair<int, int> position);

@@ -71,6 +71,15 @@ std::string King::getSymbol() { return symbol; };
 
 std::pair<int, int> King::getPosition() { return position; };
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool King::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**

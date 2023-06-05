@@ -35,6 +35,7 @@ public:
     std::string getSymbol();
     std::pair<int, int> getPosition();
     bool getIsCaptured();
+    bool getHasMoved();
 
     // Setters
     void setPosition(std::pair<int, int> position);

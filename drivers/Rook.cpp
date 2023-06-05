@@ -71,6 +71,15 @@ std::string Rook::getSymbol() { return symbol; }
 
 std::pair<int, int> Rook::getPosition() { return position; }
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Rook::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**

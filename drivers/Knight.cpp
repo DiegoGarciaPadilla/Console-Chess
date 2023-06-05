@@ -80,6 +80,15 @@ std::pair<int, int> Knight::getPosition() { return position; }
 
 void Knight::setPosition(std::pair<int, int> position) { this->position = position; }
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Knight::getHasMoved() { return hasMoved; };
+
 // Methods
 
 /**

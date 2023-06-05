@@ -53,10 +53,7 @@ Piece::Piece(int color, std::pair<int, int> position)
  * @return int
  */
 
-int Piece::getColor()
-{
-    return this->color;
-}
+int Piece::getColor() { return color; };
 
 /**
  * @brief Get the Name object
@@ -64,10 +61,7 @@ int Piece::getColor()
  * @return std::string
  */
 
-std::string Piece::getName()
-{
-    return this->name;
-}
+std::string Piece::getName() { return name; };
 
 /**
  * @brief Get the Symbol object
@@ -75,10 +69,7 @@ std::string Piece::getName()
  * @return std::string
  */
 
-std::string Piece::getSymbol()
-{
-    return this->symbol;
-}
+std::string Piece::getSymbol() { return symbol; };
 
 /**
  * @brief Get the Position object
@@ -86,10 +77,16 @@ std::string Piece::getSymbol()
  * @return std::pair<int, int>
  */
 
-std::pair<int, int> Piece::getPosition()
-{
-    return this->position;
-}
+std::pair<int, int> Piece::getPosition() { return position; };
+
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Piece::getHasMoved() { return hasMoved; };
 
 // Setters
 
@@ -99,10 +96,7 @@ std::pair<int, int> Piece::getPosition()
  * @param position
  */
 
-void Piece::setPosition(std::pair<int, int> position)
-{
-    this->position = position;
-}
+void Piece::setPosition(std::pair<int, int> position) { this->position = position; };
 
 // Methods
 

@@ -71,6 +71,15 @@ std::string Pawn::getSymbol() { return symbol; }
 
 std::pair<int, int> Pawn::getPosition() { return position; }
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Pawn::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**

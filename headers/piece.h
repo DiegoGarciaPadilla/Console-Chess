@@ -28,6 +28,8 @@ protected:
     std::string symbol = " "; // Symbol to print on the board
 
     std::pair<int, int> position; // (x, y)
+
+    bool hasMoved = false; // True if the piece has moved at least once
 public:
     // Constructor
     Piece();
@@ -38,6 +40,7 @@ public:
     virtual int getColor();
     virtual std::string getSymbol();
     virtual std::pair<int, int> getPosition();
+    virtual bool getHasMoved();
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
     virtual void setPosition(std::pair<int, int> position);

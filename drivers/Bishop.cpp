@@ -71,6 +71,15 @@ std::string Bishop::getSymbol() { return symbol; };
 
 std::pair<int, int> Bishop::getPosition() { return position; };
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Bishop::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**

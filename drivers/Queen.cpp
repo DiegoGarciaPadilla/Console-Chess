@@ -71,6 +71,15 @@ std::string Queen::getSymbol() { return symbol; }
 
 std::pair<int, int> Queen::getPosition() { return position; }
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Queen::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**
