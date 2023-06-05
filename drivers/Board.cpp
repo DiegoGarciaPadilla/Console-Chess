@@ -422,9 +422,35 @@ bool Board::capturePiece(std::pair<int, int> position)
 }
 
 /**
+ * @brief Check if the position is in attack by the enemy
+ * 
+ * @param position
+ */
+
+bool Board::isAttacked(std::pair<int, int> position)
+{
+
+    // Check if the position is attacked
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != nullptr && board[i][j]->getColor() != turn && board[i][j]->isValidMove(position, *this))
+            {
+                return true;
+            }
+        }
+    }
+
+    // Else, the position is not attacked
+    return false;
+}
+
+/**
  * @brief Check if the king of the current player is in check
  *
  * @return true
+ * @return false
  */
 
 bool Board::isCheck()
@@ -445,31 +471,7 @@ bool Board::isCheck()
     }
 
     // Check if the king is in check
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            if (board[i][j] != nullptr)
-            {
-                if (board[i][j]->getColor() != turn && board[i][j]->isValidMove(kingPosition, *this))
-                {
-                    std::cout << "Check by ";
-
-                    if (board[i][j]->getColor() == 0)
-                    {
-                        std::cout << "white ";
-                    }
-                    else
-                    {
-                        std::cout << "black ";
-                    }
-
-                    std::cout << board[i][j]->getName() << std::endl;
-                    return true;
-                }
-            }
-        }
-    }
+    return isAttacked(kingPosition);
 
     // Else, the king is not in check
     return false;
