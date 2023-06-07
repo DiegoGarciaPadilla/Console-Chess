@@ -40,18 +40,18 @@ public:
     int getTurn();
 
     // Setters
-    void setTurn(int turn);
+    void setTurn(int);
 
     // Methods
     void initializeBoard();
     void printBoard();
 
-    bool movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition);
-    bool capturePiece(std::pair<int, int> position);
-    bool isAttacked(std::pair<int, int> position);
+    bool movePiece(std::pair<int, int>, std::pair<int, int>);
+    bool capturePiece(std::pair<int, int>);
+    bool isAttacked(std::pair<int, int>);
     bool isCheck();
     
-    Piece *getPiece(std::pair<int, int> position);
+    Piece *getPiece(std::pair<int, int>);
 };
 
 #endif

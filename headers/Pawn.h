@@ -27,7 +27,7 @@ private:
 public:
     // Constructor
     Pawn();
-    Pawn(int color, std::pair<int, int> position);
+    Pawn(int, std::pair<int, int>);
 
     // Getters
     std::string getName();
@@ -38,10 +38,10 @@ public:
     bool getHasMoved();
 
     // Setters
-    void setPosition(std::pair<int, int> position);
+    void setPosition(std::pair<int, int>);
 
     // Methods
-    bool isValidMove(std::pair<int, int> positionToMove, Board &board);
+    bool isValidMove(std::pair<int, int>, Board&);
 };
 
 #endif

@@ -33,7 +33,7 @@ protected:
 public:
     // Constructor
     Piece();
-    Piece(int color, std::pair<int, int> position);
+    Piece(int, std::pair<int, int>);
 
     // Getters (the getters are virtual because they are overriden in the subclasses)
     virtual std::string getName();
@@ -43,10 +43,10 @@ public:
     virtual bool getHasMoved();
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
-    virtual void setPosition(std::pair<int, int> position);
+    virtual void setPosition(std::pair<int, int>);
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
-    virtual bool isValidMove(std::pair<int, int> positionToMove, Board &board);
+    virtual bool isValidMove(std::pair<int, int>, Board&);
 };
 
 #endif
