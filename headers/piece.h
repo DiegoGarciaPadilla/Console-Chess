@@ -1,7 +1,7 @@
 /**
  * @file Piece.h
  * @author Diego Antonio García Padilla (A01710777)
- * @brief Definition of the Piece class
+ * @brief Definition of the abstract Piece class
  * @version 0.1
  * @date 2023-05-20
  *
@@ -43,10 +43,10 @@ public:
     virtual bool getHasMoved();
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
-    virtual void setPosition(std::pair<int, int>);
+    virtual void setPosition(std::pair<int, int>) = 0;
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
-    virtual bool isValidMove(std::pair<int, int>, Board&);
+    virtual bool isValidMove(std::pair<int, int>, Board&) = 0;
 };
 
 #endif
