@@ -228,8 +228,15 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
         capturePiece(finalPosition);
     }
 
+    // Check if the move puts the player in check
+    if (isCheckAfterMove(initialPosition, finalPosition))
+    {
+        std::cout << "You cannot put yourself in check" << std::endl;
+        return false;
+    }
+
     // Move piece
-    board.standardMove(initialPosition, finalPosition);
+    board.movePiece(initialPosition, finalPosition);
 
     // Change turn
     turn = (turn + 1) % 2;
@@ -283,5 +290,33 @@ bool Game::isCheck(int turn)
     // Check if the King is in check
     return board.isAttacked(turn, kingPosition);
 }
+
+/**
+ * @brief Checks if the move puts the player in check
+ * 
+ * @param initialPosition
+ * @param finalPosition
+ * @return true 
+ * @return false 
+ */
+
+bool Game::isCheckAfterMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+{
+    // Get the color of the piece
+    int color = this->board.getPiece(initialPosition)->getColor();
+
+    // Move the piece
+    board.movePiece(initialPosition, finalPosition);
+
+    // Check if the King is in check
+    bool check = isCheck(color);
+
+    // Undo the move
+    board.undoMove(initialPosition, finalPosition);
+
+    // Return the result
+    return check;
+}
+
 
 #endif

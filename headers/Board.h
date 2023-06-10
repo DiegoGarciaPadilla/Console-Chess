@@ -39,7 +39,8 @@ public:
     void printBoard(int);
 
     bool isOccupied(std::pair<int, int>);
-    bool standardMove(std::pair<int, int>, std::pair<int, int>);
+    bool movePiece(std::pair<int, int>, std::pair<int, int>);
+    bool undoMove(std::pair<int, int>, std::pair<int, int>);
 
     std::pair<int, int> getKingPosition(int);
 

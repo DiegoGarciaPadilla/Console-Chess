@@ -279,7 +279,7 @@ bool Board::isOccupied(std::pair<int, int> position)
  * @return false
  */
 
-bool Board::standardMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
 {
 
     // Get row and column of the initial position
@@ -296,6 +296,37 @@ bool Board::standardMove(std::pair<int, int> initialPosition, std::pair<int, int
     // Update the board
     board[xFinal][yFinal] = board[xInitial][yInitial];
     board[xInitial][yInitial] = nullptr;
+
+    // Return true
+    return true;
+}
+
+/**
+ * @brief Undo a move
+ *
+ * @param initialPosition
+ * @param finalPosition
+ * @return true
+ * @return false
+ */
+
+bool Board::undoMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+{
+
+    // Get row and column of the initial position
+    int xInitial = initialPosition.first;
+    int yInitial = initialPosition.second;
+
+    // Get row and column of the final position
+    int xFinal = finalPosition.first;
+    int yFinal = finalPosition.second;
+
+    // Update the position of the piece
+    board[xFinal][yFinal]->setPosition(initialPosition);
+
+    // Update the board
+    board[xInitial][yInitial] = board[xFinal][yFinal];
+    board[xFinal][yFinal] = nullptr;
 
     // Return true
     return true;
