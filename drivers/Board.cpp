@@ -44,6 +44,26 @@ Board::Board()
     }
 }
 
+// Copy constructor
+
+/**
+ * @brief Construct a new Board:: Board object
+ *
+ * @param other
+ */
+
+Board::Board(const Board &other)
+{
+    // Copy the board
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            board[i][j] = other.board[i][j];
+        }
+    }
+}
+
 // Destructor
 
 /**

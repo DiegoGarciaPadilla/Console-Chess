@@ -28,6 +28,9 @@ public:
     // Constructor
     Board();
 
+    // Copy constructor
+    Board(const Board &);
+
     // Destructor
     ~Board();
 
@@ -41,7 +44,6 @@ public:
     std::pair<int, int> getKingPosition(int);
 
     bool isAttacked(int, std::pair<int, int>);
-    bool isCheck(int);
     
     Piece *getPiece(std::pair<int, int>);
 };
