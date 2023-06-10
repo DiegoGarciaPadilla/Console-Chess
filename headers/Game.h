@@ -51,8 +51,6 @@ public:
     bool capturePiece(std::pair<int, int>);
 
     bool isCheck(int turn);
-
-    Piece *getPiece(std::pair<int, int>);
 };
 
 #endif
