@@ -48,6 +48,9 @@ public:
 
     bool movePiece(std::pair<int, int>, std::pair<int, int>);
     bool capturePiece(std::pair<int, int>);
+
+    std::pair<int, int> getKingPosition(int);
+
     bool isAttacked(std::pair<int, int>);
     bool isCheck();
     

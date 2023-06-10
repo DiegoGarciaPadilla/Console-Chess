@@ -15,6 +15,7 @@
 #include <iostream>
 #include <utility>
 #include <string>
+#include <vector>
 
 class Board; // Forward declaration (to avoid circular dependencies)
 
@@ -43,7 +44,7 @@ public:
     virtual bool getHasMoved();
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
-    virtual void setPosition(std::pair<int, int>) = 0;
+    virtual void setPosition(std::pair<int, int>);
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int>, Board&) = 0;

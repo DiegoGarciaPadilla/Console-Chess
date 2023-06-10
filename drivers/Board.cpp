@@ -422,6 +422,34 @@ bool Board::capturePiece(std::pair<int, int> position)
 }
 
 /**
+ * @brief Get the position of the king
+ * 
+ * @param color
+ * @return std::pair<int, int> 
+ */
+
+std::pair<int, int> Board::getKingPosition(int color)
+{
+    // Initialize the position of the king
+    std::pair<int, int> kingPosition;
+
+    // Get the position of the king
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != nullptr && board[i][j]->getColor() == color && board[i][j]->getName() == "King")
+            {
+                kingPosition = board[i][j]->getPosition();
+            }
+        }
+    }
+
+    // Return the position of the king
+    return kingPosition;
+}
+
+/**
  * @brief Check if the position is in attack by the enemy
  * 
  * @param position
@@ -459,16 +487,7 @@ bool Board::isCheck()
     std::pair<int, int> kingPosition;
 
     // Get the position of the king
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            if (board[i][j] != nullptr && board[i][j]->getColor() == turn && board[i][j]->getName() == "King")
-            {
-                kingPosition = board[i][j]->getPosition();
-            }
-        }
-    }
+    kingPosition = getKingPosition(turn);
 
     // Check if the king is in check
     return isAttacked(kingPosition);
