@@ -115,4 +115,17 @@ bool Piece::isValidMove(std::pair<int, int> position, Board &board)
     return true;
 }
 
+/**
+ * @brief Get the Possible Moves object
+ *
+ * @param board
+ * @return std::vector<std::pair<int, int>>
+ */
+
+std::vector<std::pair<int, int>> Piece::getPossibleMoves(Board &board)
+{
+    // This method will be implemented in the child classes by overriding it
+    return std::vector<std::pair<int, int>>();
+}
+
 #endif

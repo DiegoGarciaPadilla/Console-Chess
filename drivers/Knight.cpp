@@ -135,4 +135,38 @@ bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
     return true;
 }
 
+/**
+ * @brief Return a vector with all the possible moves
+ * 
+ * @param board
+ * @return std::vector<std::pair<int, int>>
+ */
+
+std::vector<std::pair<int, int>> Knight::getPossibleMoves(Board &board)
+{
+    // Initialize vector
+    std::vector<std::pair<int, int>> possibleMoves;
+
+    // Get row and column of the position
+    int xInitial = position.first;
+    int yInitial = position.second;
+
+    // Check all the possible moves
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // Check if the move is valid
+            if (isValidMove(std::make_pair(i, j), board))
+            {
+                // Add the move to the vector
+                possibleMoves.push_back(std::make_pair(i, j));
+            }
+        }
+    }
+
+    // Return vector
+    return possibleMoves;
+}
+
 #endif

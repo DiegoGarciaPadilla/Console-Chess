@@ -48,6 +48,7 @@ public:
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int>, Board&) = 0;
+    virtual std::vector<std::pair<int, int>> getPossibleMoves(Board&) = 0;
 };
 
 #endif
