@@ -125,12 +125,6 @@ bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
-    // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
-    {
-        board.capturePiece(positionToMove);
-    }
-
     // If the move is in L shape, return true
     return true;
 }

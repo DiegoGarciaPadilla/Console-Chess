@@ -183,13 +183,7 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
             }
         }
     }
-
-    // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
-    {
-        board.capturePiece(positionToMove);
-    }
-
+    
     // If the move is diagonal, horizontal or vertical, and there are no pieces in the way, the move is valid
     return true;
 }

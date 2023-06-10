@@ -14,17 +14,13 @@
 #include <string>
 #include <utility>
 
-#include "drivers/Piece.cpp" // Parent class
-#include "drivers/Board.cpp" // Board class
+#include "drivers/Game.cpp" // Game class
 
 
 int main()
 {
-    // Create board
-    Board board;
-
-    // Initialize board
-    board.initializeBoard();
+    // Create Game
+    Game game;
 
     // Initialize variables
     int initialX, initialY, finalX, finalY;
@@ -34,7 +30,7 @@ int main()
     while (true)
     {
         // Print board
-        board.printBoard();
+        game.printBoard();
 
         // Message
         std::cout << "Make a move!" << std::endl;
@@ -57,7 +53,7 @@ int main()
         std::pair<int, int> finalPosition = std::make_pair(finalX, finalY);
 
         // Move piece
-        if (!board.movePiece(initialPosition, finalPosition))
+        if (!game.movePiece(initialPosition, finalPosition))
         {
             system("pause");
         }
@@ -66,14 +62,8 @@ int main()
         system("cls");
     }
 
-    // Print board
-    board.printBoard();
-
     // Pause
     system("pause");
-
-    // Destroy board
-    board.~Board();
 
     return 0;
 }

@@ -126,12 +126,6 @@ bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
-    // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
-    {
-        board.capturePiece(positionToMove);
-    }
-
     // Move is valid
     return true;
 }

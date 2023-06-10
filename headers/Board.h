@@ -23,12 +23,7 @@ class Board
 {
 private:
     // Attributes
-    Piece *board[8][8];
-    int turn = 0; // 0 = white, 1 = black
-
-    // Captured pieces
-    std::vector<Piece *> whiteCapturedPieces; // Pieces captured by white
-    std::vector<Piece *> blackCapturedPieces; // Pieces captured by black
+    Piece *board[8][8]; // Board
 public:
     // Constructor
     Board();
@@ -36,23 +31,17 @@ public:
     // Destructor
     ~Board();
 
-    // Getters
-    int getTurn();
-
-    // Setters
-    void setTurn(int);
-
     // Methods
     void initializeBoard();
-    void printBoard();
+    void printBoard(int);
 
-    bool movePiece(std::pair<int, int>, std::pair<int, int>);
-    bool capturePiece(std::pair<int, int>);
+    bool isOccupied(std::pair<int, int>);
+    bool standardMove(std::pair<int, int>, std::pair<int, int>);
 
     std::pair<int, int> getKingPosition(int);
 
-    bool isAttacked(std::pair<int, int>);
-    bool isCheck();
+    bool isAttacked(int, std::pair<int, int>);
+    bool isCheck(int);
     
     Piece *getPiece(std::pair<int, int>);
 };

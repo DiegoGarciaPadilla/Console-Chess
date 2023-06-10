@@ -154,15 +154,9 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
     // Check if the pawn is moving diagonally without capturing
-    else if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && board.getPiece(std::make_pair(xFinal, yFinal)) == nullptr)
+    else if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && !board.isOccupied(positionToMove))
     {
         return false;
-    }
-
-    // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
-    {
-        board.capturePiece(positionToMove);
     }
 
     // Set first move to false

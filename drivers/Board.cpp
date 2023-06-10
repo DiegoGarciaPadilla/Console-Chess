@@ -42,9 +42,6 @@ Board::Board()
             board[i][j] = nullptr;
         }
     }
-
-    // Set the turn to white
-    turn = 0;
 }
 
 // Destructor
@@ -64,32 +61,6 @@ Board::~Board()
             delete board[i][j];
         }
     }
-}
-
-// Getters
-
-/**
- * @brief Get the Turn object
- *
- * @return int
- */
-
-int Board::getTurn()
-{
-    return turn;
-}
-
-// Setters
-
-/**
- * @brief Set the Turn object
- *
- * @param turn
- */
-
-void Board::setTurn(int turn)
-{
-    this->turn = turn;
 }
 
 // Methods
@@ -170,24 +141,8 @@ void Board::initializeBoard()
  *
  */
 
-void Board::printBoard()
+void Board::printBoard(int turn)
 {
-    // Print turn
-    if (turn == 0)
-    {
-        std::cout << "White's turn" << std::endl;
-    }
-    else
-    {
-        std::cout << "Black's turn" << std::endl;
-    }
-
-    // Print a message if the king is in check
-    if (isCheck())
-    {
-        std::cout << "Your King is in check!" << std::endl;
-    }
-    std::cout << std::endl;
 
     // Print the board for the white player
     if (turn == 0)
@@ -270,29 +225,33 @@ void Board::printBoard()
             std::cout << "    7    6    5    4    3    2    1    0" << std::endl;
         }
     }
-    std::cout << std::endl;
-
-    // Print captured pieces
-
-    std::cout << "Captured pieces : " << std::endl;
-
-    std::cout << "White: ";
-    for (int i = 0; i < whiteCapturedPieces.size(); i++)
-    {
-        std::cout << whiteCapturedPieces[i]->getSymbol() << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Black: ";
-    for (int i = 0; i < blackCapturedPieces.size(); i++)
-    {
-        std::cout << blackCapturedPieces[i]->getSymbol() << " ";
-    }
-    std::cout << std::endl;
 }
 
 /**
- * @brief Move a piece from an initial position to a final position
+ * @brief Check if the position is occupied by a piece
+ *
+ */
+
+bool Board::isOccupied(std::pair<int, int> position)
+{
+    // Get row and column of the position
+    int x = position.first;
+    int y = position.second;
+
+    // Check if the position is occupied
+    if (board[x][y] == nullptr)
+    {
+        return false;
+    }
+
+    else
+    {
+        return true;
+    }
+}
+
+/**
+ * @brief Move a piece from an initial position to a final position (no castling, no en passant, no promotion)
  *
  * @param initialPosition
  * @param finalPosition
@@ -300,7 +259,7 @@ void Board::printBoard()
  * @return false
  */
 
-bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+bool Board::standardMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
 {
 
     // Get row and column of the initial position
@@ -308,124 +267,25 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     int yInitial = initialPosition.second;
 
     // Get row and column of the final position
-
     int xFinal = finalPosition.first;
     int yFinal = finalPosition.second;
 
-    // Check if the initial position is valid
-
-    if (xInitial < 0 || xInitial > 7 || yInitial < 0 || yInitial > 7)
-    {
-        std::cout << "Invalid initial position" << std::endl;
-        return false;
-    }
-
-    // Check if the final position is valid
-
-    if (xFinal < 0 || xFinal > 7 || yFinal < 0 || yFinal > 7)
-    {
-        std::cout << "Invalid final position" << std::endl;
-        return false;
-    }
-
-    // Check if the initial position is empty
-
-    if (board[xInitial][yInitial] == nullptr)
-    {
-        std::cout << "Initial position is empty" << std::endl;
-        return false;
-    }
-
-    // Check if the final position is empty or has an enemy piece
-
-    if (board[xFinal][yFinal] != nullptr && board[xFinal][yFinal]->getColor() == turn)
-    {
-        std::cout << "You cannot capture your own piece" << std::endl;
-        return false;
-    }
-
-    // Check if the piece belongs to the player
-
-    if (board[xInitial][yInitial]->getColor() != turn)
-    {
-        std::cout << "Piece does not belong to the player" << std::endl;
-        return false;
-    }
-
-    // Check if the piece moves to a different position
-
-    if (xInitial == xFinal && yInitial == yFinal)
-    {
-        std::cout << "Piece does not move" << std::endl;
-        return false;
-    }
-
-    // Check if the piece can move to the final position
-
-    if (!board[xInitial][yInitial]->isValidMove(finalPosition, *this))
-    {
-        std::cout << "Invalid move" << std::endl;
-        return false;
-    }
-
-    // Check if there is a king in the final position
-    if (board[xFinal][yFinal] != nullptr && board[xFinal][yFinal]->getName() == "K")
-    {
-        std::cout << "The king cannot be captured" << std::endl;
-        return false;
-    }
-
     // Update the position of the piece
-
     board[xInitial][yInitial]->setPosition(finalPosition);
 
     // Update the board
-
     board[xFinal][yFinal] = board[xInitial][yInitial];
     board[xInitial][yInitial] = nullptr;
 
-    // Update the turn
-
-    turn = (turn + 1) % 2;
-
-    return true;
-}
-
-/**
- * @brief Capture a piece
- *
- * @param position
- * @return true
- * @return false
- */
-
-bool Board::capturePiece(std::pair<int, int> position)
-{
-    // Get row and column of the position
-    int x = position.first;
-    int y = position.second;
-
-    // We assume that the position is valid and that there is a piece in the position
-
-    // Add the piece to the captured pieces
-    if (turn == 0)
-    {
-        whiteCapturedPieces.push_back(board[x][y]);
-    }
-
-    else
-    {
-        blackCapturedPieces.push_back(board[x][y]);
-    }
-
+    // Return true
     return true;
 }
 
 /**
  * @brief Get the position of the king
- * 
+ *
  * @param color
- * @return std::pair<int, int> 
+ * @return std::pair<int, int>
  */
 
 std::pair<int, int> Board::getKingPosition(int color)
@@ -451,11 +311,11 @@ std::pair<int, int> Board::getKingPosition(int color)
 
 /**
  * @brief Check if the position is in attack by the enemy
- * 
+ *
  * @param position
  */
 
-bool Board::isAttacked(std::pair<int, int> position)
+bool Board::isAttacked(int color, std::pair<int, int> position)
 {
 
     // Check if the position is attacked
@@ -463,7 +323,7 @@ bool Board::isAttacked(std::pair<int, int> position)
     {
         for (int j = 0; j < 8; j++)
         {
-            if (board[i][j] != nullptr && board[i][j]->getColor() != turn && board[i][j]->isValidMove(position, *this))
+            if (board[i][j] != nullptr && board[i][j]->getColor() != color && board[i][j]->isValidMove(position, *this))
             {
                 return true;
             }
@@ -471,28 +331,6 @@ bool Board::isAttacked(std::pair<int, int> position)
     }
 
     // Else, the position is not attacked
-    return false;
-}
-
-/**
- * @brief Check if the king of the current player is in check
- *
- * @return true
- * @return false
- */
-
-bool Board::isCheck()
-{
-    // Initialize the position of the king
-    std::pair<int, int> kingPosition;
-
-    // Get the position of the king
-    kingPosition = getKingPosition(turn);
-
-    // Check if the king is in check
-    return isAttacked(kingPosition);
-
-    // Else, the king is not in check
     return false;
 }
 

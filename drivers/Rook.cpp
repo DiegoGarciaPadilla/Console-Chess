@@ -137,7 +137,7 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
             // Check if there are pieces in the way
             for (int i = xInitial + 1; i < xFinal; i++)
             {
-                if (board.getPiece(std::make_pair(i, yInitial)) != nullptr)
+                if (board.isOccupied(std::make_pair(i, yInitial)))
                 {
                     return false;
                 }
@@ -149,7 +149,7 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
             // Check if there are pieces in the way
             for (int i = xInitial - 1; i > xFinal; i--)
             {
-                if (board.getPiece(std::make_pair(i, yInitial)) != nullptr)
+                if (board.isOccupied(std::make_pair(i, yInitial)))
                 {
                     return false;
                 }
@@ -165,7 +165,7 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
             // Check if there are pieces in the way
             for (int i = yInitial + 1; i < yFinal; i++)
             {
-                if (board.getPiece(std::make_pair(xInitial, i)) != nullptr)
+                if (board.isOccupied(std::make_pair(i, yInitial)))
                 {
                     return false;
                 }
@@ -177,18 +177,12 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
             // Check if there are pieces in the way
             for (int i = yInitial - 1; i > yFinal; i--)
             {
-                if (board.getPiece(std::make_pair(xInitial, i)) != nullptr)
+                if (board.isOccupied(std::make_pair(i, yInitial)))
                 {
                     return false;
                 }
             }
         }
-    }
-
-    // Capture piece if there is one
-    if (board.getPiece(positionToMove) != nullptr && board.getPiece(positionToMove)->getColor() != color && board.getPiece(positionToMove)->getName() != "King")
-    {
-        board.capturePiece(positionToMove);
     }
 
     // If the move is horizontal or vertical, it's valid
