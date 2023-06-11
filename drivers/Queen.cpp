@@ -126,6 +126,12 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
+    // Check if there is a piece in the position to move and if it is an enemy piece
+    if (board.isOccupied(positionToMove) && board.getPiece(positionToMove)->getColor() == color)
+    {
+        return false;
+    }
+
     // Check if there are pieces in the way
 
     // If the move is diagonal
@@ -177,6 +183,64 @@ bool Queen::isValidMove(std::pair<int, int> positionToMove, Board &board)
             for (int i = 1; i < abs(xDifference); i++)
             {
                 if (board.getPiece(std::make_pair(xInitial - i, yInitial - i)) != nullptr)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    // If the move is horizontal
+    else if (xDifference == 0)
+    {
+        // If the move is to the right
+        if (yDifference > 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < yDifference; i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial, yInitial + i)) != nullptr)
+                {
+                    return false;
+                }
+            }
+        }
+
+        // If the move is to the left
+        if (yDifference < 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < abs(yDifference); i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial, yInitial - i)) != nullptr)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    // If the move is vertical
+    else if (yDifference == 0)
+    {
+        // If the move is to the top
+        if (xDifference > 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < xDifference; i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial + i, yInitial)) != nullptr)
+                {
+                    return false;
+                }
+            }
+        }
+
+        // If the move is to the bottom
+        if (xDifference < 0)
+        {
+            // Check if there are pieces in the way
+            for (int i = 1; i < abs(xDifference); i++)
+            {
+                if (board.getPiece(std::make_pair(xInitial - i, yInitial)) != nullptr)
                 {
                     return false;
                 }

@@ -120,19 +120,16 @@ bool King::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
-    // Check if the move is valid
+    // Check if the king is moving more than one square
     if (abs(xDifference) > 1 || abs(yDifference) > 1)
     {
         return false;
     }
 
     // Check if there is a piece in the position to move and if it is an enemy piece
-    if (board.getPiece(positionToMove) != nullptr)
+    if (board.isOccupied(positionToMove) && board.getPiece(positionToMove)->getColor() == color)
     {
-        if (board.getPiece(positionToMove)->getColor() == color)
-        {
-            return false;
-        }
+        return false;
     }
 
     // Move is valid

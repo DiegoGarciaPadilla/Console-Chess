@@ -121,7 +121,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     }
 
     // Check if the pawn is moving horizontally
-    if (abs(xDifference) >= 1)
+    if (abs(xDifference) > 1 || (abs(xDifference) == 1 && abs(yDifference) == 0))
     {
         return false;
     }
@@ -136,6 +136,16 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
+    // Check for first move
+    if (isFirstMove)
+    {
+        // Check if the pawn is moving more than 2 spaces
+        if (abs(yDifference) > 2 || abs(yDifference) == 2 && abs(xDifference) > 0)
+        {
+            return false;
+        }
+    }
+
     // Check if the pawn is moving more than 2 spaces
     if (abs(yDifference) > 2)
     {
@@ -148,8 +158,14 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
+    // Check if the pawn is capturing 2 spaces away
+    if (abs(xDifference) >= 1 && abs(yDifference) >= 2)
+    {
+        return false;
+    }
+
     // Check if the pawn is moving other than vertically or diagonally
-    if (abs(xDifference) >= 1 &&  abs(yDifference) >= 1)
+    if (abs(xDifference) > 1 && abs(yDifference) > 1)
     {
         return false;
     }
@@ -161,7 +177,13 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     }
 
     // Check if the pawn is capturing vertically
-    if (abs(xDifference) == 0 && abs(yDifference) == 1 && board.isOccupied(positionToMove))
+    if (abs(xDifference) == 0 && abs(yDifference) >= 1 && board.isOccupied(positionToMove))
+    {
+        return false;
+    }
+
+    // Check if there is a piece in the position to move and if it is an enemy piece
+    if (board.isOccupied(positionToMove) && board.getPiece(positionToMove)->getColor() == color)
     {
         return false;
     }
@@ -175,7 +197,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
 
 /**
  * @brief Return a vector with all the possible moves
- * 
+ *
  * @param board
  * @return std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>>
  */

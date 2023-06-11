@@ -126,6 +126,12 @@ bool Rook::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
+    // Check if there is a piece in the position to move and if it is an enemy piece
+    if (board.isOccupied(positionToMove) && board.getPiece(positionToMove)->getColor() == color)
+    {
+        return false;
+    }
+
     // Check if there are pieces in the way
 
     // If the move is horizontal
