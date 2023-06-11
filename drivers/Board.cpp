@@ -16,6 +16,7 @@
 #include <vector>
 #include <utility>
 #include <string>
+#include <algorithm>
 
 #include "../headers/Board.h" // Header file
 #include "Bishop.cpp"         // Bishop class
@@ -302,37 +303,6 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
 }
 
 /**
- * @brief Undo a move
- *
- * @param initialPosition
- * @param finalPosition
- * @return true
- * @return false
- */
-
-bool Board::undoMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
-{
-
-    // Get row and column of the initial position
-    int xInitial = initialPosition.first;
-    int yInitial = initialPosition.second;
-
-    // Get row and column of the final position
-    int xFinal = finalPosition.first;
-    int yFinal = finalPosition.second;
-
-    // Update the position of the piece
-    board[xFinal][yFinal]->setPosition(initialPosition);
-
-    // Update the board
-    board[xInitial][yInitial] = board[xFinal][yFinal];
-    board[xFinal][yFinal] = nullptr;
-
-    // Return true
-    return true;
-}
-
-/**
  * @brief Get the position of the king
  *
  * @param color
@@ -361,6 +331,73 @@ std::pair<int, int> Board::getKingPosition(int color)
 }
 
 /**
+ * @brief Get all the pieces of a given color
+ *
+ * @param color
+ * @return std::vector<Piece*>
+ */
+
+std::vector<Piece *> Board::getPieces(int color)
+{
+    // Initialize the vector of pieces
+    std::vector<Piece *> pieces;
+
+    // Get all the pieces of the given color
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != nullptr && board[i][j]->getColor() == color)
+            {
+                pieces.push_back(board[i][j]);
+            }
+        }
+    }
+
+    // Return the vector of pieces
+    return pieces;
+}
+
+/**
+ * @brief Get all possible moves of a given color
+ *
+ * @param color
+ * @return std::vector<std::pair<int, int>>
+ */
+
+std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> Board::getAllPossibleMoves(int color)
+{
+    // Initialize the vector of possible moves
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> possibleMoves;
+
+    // Initialize a temporary vector of possible moves
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> tempPossibleMoves;
+
+    // Get all the pieces of the given color
+    std::vector<Piece *> pieces = getPieces(color);
+
+    // Get all the possible moves of the given color
+    for (int i = 0; i < pieces.size(); i++)
+    {
+        // Get the possible moves of the piece
+        tempPossibleMoves = pieces[i]->getPossibleMoves(*this);
+
+        // fusion the vectors
+        possibleMoves.insert(possibleMoves.end(), tempPossibleMoves.begin(), tempPossibleMoves.end());
+
+        // Clear the temporary vector
+        tempPossibleMoves.clear();
+    }
+
+    // Check for duplicates
+    std::sort(possibleMoves.begin(), possibleMoves.end());
+    possibleMoves.erase(std::unique(possibleMoves.begin(), possibleMoves.end()), possibleMoves.end());
+
+    // Return the vector of possible moves
+    return possibleMoves;
+}
+
+/**
  * @brief Check if the position is in attack by the enemy
  *
  * @param position
@@ -383,6 +420,23 @@ bool Board::isAttacked(int color, std::pair<int, int> position)
 
     // Else, the position is not attacked
     return false;
+}
+
+/**
+ * @brief Check if the king is in check
+ *
+ * @param color
+ * @return true
+ * @return false
+ */
+
+bool Board::isCheck(int color)
+{
+    // Get the position of the king
+    std::pair<int, int> kingPosition = getKingPosition(color);
+
+    // Check if the king is attacked
+    return isAttacked(color, kingPosition);
 }
 
 /**

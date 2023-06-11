@@ -4,22 +4,22 @@
  * @brief Implementation of the Game class
  * @version 0.1
  * @date 2023-06-10
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef GAME_CPP
 #define GAME_CPP
 
 #include "../headers/Game.h" // Header file
-#include "Board.cpp"          // Board class
+#include "Board.cpp"         // Board class
 
 // Constructor
 
 /**
  * @brief Construct a new Game:: Game object
- * 
+ *
  */
 
 Game::Game()
@@ -39,7 +39,7 @@ Game::Game()
 
 /**
  * @brief Destroy the Game:: Game object
- * 
+ *
  */
 
 Game::~Game()
@@ -63,8 +63,8 @@ Game::~Game()
 
 /**
  * @brief Get the Turn object
- * 
- * @return int 
+ *
+ * @return int
  */
 
 int Game::getTurn() { return turn; }
@@ -73,8 +73,8 @@ int Game::getTurn() { return turn; }
 
 /**
  * @brief Set the Turn object
- * 
- * @param newTurn 
+ *
+ * @param newTurn
  */
 
 void Game::setTurn(int newTurn) { turn = newTurn; }
@@ -83,7 +83,7 @@ void Game::setTurn(int newTurn) { turn = newTurn; }
 
 /**
  * @brief Starts a new game
- * 
+ *
  */
 
 void Game::newGame()
@@ -100,8 +100,90 @@ void Game::newGame()
 }
 
 /**
- * @brief Prints the board
- * 
+ * @brief Plays a game
+ *
+ */
+
+void Game::playGame()
+{
+    // Clear screen
+    system("cls");
+
+    // Initialize variables
+    int xInitial, yInitial, xFinal, yFinal;
+
+    // Initialize pair of positions
+    std::pair<int, int> initialPosition;
+    std::pair<int, int> finalPosition;
+
+    // Start game
+    while (!isCheckmate(this->turn))
+    {
+        // Print board
+        printBoard();
+
+        // Get initial position
+        std::cout << "Initial position: " << std::endl;
+        std::cout << "Row: ";
+        std::cin >> xInitial;
+        std::cout << "Column: ";
+        std::cin >> yInitial;
+        std::cout << std::endl;
+
+        // Get final position
+        std::cout << "Final position: " << std::endl;
+        std::cout << "Row: ";
+        std::cin >> xFinal;
+        std::cout << "Column: ";
+        std::cin >> yFinal;
+        std::cout << std::endl;
+
+        // Set initial position
+        initialPosition = std::make_pair(xInitial, yInitial);
+
+        // Set final position
+        finalPosition = std::make_pair(xFinal, yFinal);
+
+        // Move piece
+        if (!movePiece(initialPosition, finalPosition))
+        {
+            // Pause
+            std::cin.ignore();
+        }
+
+        // Clear screen
+        system("cls");
+    }
+
+    // Print winner
+    if (turn == 0)
+    {
+        std::cout << "Black wins!" << std::endl;
+    }
+    else
+    {
+        std::cout << "White wins!" << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Print board
+    board.printBoard(turn);
+    std::cout << std::endl;
+
+    // Print captured pieces
+    printCapturedPieces();
+    std::cout << std::endl;
+
+    // Pause
+    system("pause");
+
+    // Destroy game
+    this->~Game();
+}
+
+/**
+ * @brief Print the board
+ *
  */
 
 void Game::printBoard()
@@ -128,6 +210,20 @@ void Game::printBoard()
     std::cout << std::endl;
 
     // Print captured pieces
+    printCapturedPieces();
+    std::cout << std::endl;
+
+    std::cout << std::endl;
+}
+
+/**
+ * @brief Print the pieces captured by the players
+ *
+ */
+
+void Game::printCapturedPieces()
+{
+    // Print captured pieces
     std::cout << "Captured pieces : " << std::endl;
 
     std::cout << "White: ";
@@ -142,9 +238,6 @@ void Game::printBoard()
     {
         std::cout << blackCapturedPieces[i]->getSymbol() << " ";
     }
-    std::cout << std::endl;
-
-    std::cout << std::endl;
 }
 
 /**
@@ -247,8 +340,8 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
 
 /**
  * @brief Captures a piece
- * 
- * @param position 
+ *
+ * @param position
  * @return true
  * @return false
  */
@@ -277,46 +370,92 @@ bool Game::capturePiece(std::pair<int, int> position)
 
 /**
  * @brief Checks if the player is in check
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 
 bool Game::isCheck(int turn)
 {
-    // Get the position of the King
-    std::pair<int, int> kingPosition = board.getKingPosition(turn);
-
     // Check if the King is in check
-    return board.isAttacked(turn, kingPosition);
+    return board.isCheck(turn);
 }
 
 /**
  * @brief Checks if the move puts the player in check
- * 
+ *
  * @param initialPosition
  * @param finalPosition
- * @return true 
- * @return false 
+ * @return true
+ * @return false
  */
 
 bool Game::isCheckAfterMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
 {
-    // Get the color of the piece
-    int color = this->board.getPiece(initialPosition)->getColor();
+    // Initialize variables
+    std::pair<int, int> kingPosition;
+    bool isCheck = false;
 
-    // Move the piece
+    // Get the position of the King
+    kingPosition = board.getKingPosition(turn);
+
+    // Move piece
     board.movePiece(initialPosition, finalPosition);
 
     // Check if the King is in check
-    bool check = isCheck(color);
+    isCheck = board.isCheck(turn);
 
-    // Undo the move
-    board.undoMove(initialPosition, finalPosition);
+    // Move piece back
+    board.movePiece(finalPosition, initialPosition);
 
-    // Return the result
-    return check;
+    // Return true if the King is in check
+    return isCheck;
 }
 
+/**
+ * @brief Checks if the player is in checkmate
+ *
+ * @return true
+ * @return false
+ */
+
+bool Game::isCheckmate(int turn)
+{
+    // Initialize variables
+    std::pair<int, int> kingPosition;
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> possibleMoves;
+
+    bool isCheckmate = true;
+
+    // Check if the player is in check
+    if (!isCheck(turn))
+    {
+        return false;
+    }
+
+    // Get the position of the King
+    kingPosition = board.getKingPosition(turn);
+
+    // Get all the possible moves for the player
+    possibleMoves = board.getAllPossibleMoves(turn);
+
+    // Check if any of the possible moves puts the player out of check
+    for (int i = 0; i < possibleMoves.size(); i++)
+    {
+        // Get the initial and final positions of the move
+        std::pair<int, int> initialPosition = possibleMoves[i].first;
+        std::pair<int, int> finalPosition = possibleMoves[i].second;
+
+        // Check if the move puts the player out of check
+        if (!isCheckAfterMove(initialPosition, finalPosition))
+        {
+            isCheckmate = false;
+            break;
+        }
+    }
+
+    // Else, the player is in checkmate
+    return isCheckmate;
+}
 
 #endif

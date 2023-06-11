@@ -45,13 +45,17 @@ public:
 
     // Methods
     void newGame();
+    void playGame();
     void printBoard();
+    void printCapturedPieces();
 
     bool movePiece(std::pair<int, int>, std::pair<int, int>);
     bool capturePiece(std::pair<int, int>);
 
     bool isCheck(int turn);
     bool isCheckAfterMove(std::pair<int, int>, std::pair<int, int>);
+    bool isCheckmate(int turn);
+    bool isStalemate(int turn);
 };
 
 #endif

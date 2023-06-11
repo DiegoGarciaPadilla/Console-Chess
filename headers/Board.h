@@ -43,8 +43,11 @@ public:
     bool undoMove(std::pair<int, int>, std::pair<int, int>);
 
     std::pair<int, int> getKingPosition(int);
+    std::vector<Piece*> getPieces(int);
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> getAllPossibleMoves(int);
 
     bool isAttacked(int, std::pair<int, int>);
+    bool isCheck(int);
     
     Piece *getPiece(std::pair<int, int>);
 };
