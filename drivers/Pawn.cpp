@@ -159,6 +159,12 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
+    // Check if the pawn is capturing vertically
+    if (abs(xDifference) == 0 && abs(yDifference) == 1 && board.isOccupied(positionToMove))
+    {
+        return false;
+    }
+
     // Set first move to false
     isFirstMove = false;
 
@@ -170,13 +176,17 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
  * @brief Return a vector with all the possible moves
  * 
  * @param board
- * @return std::vector<std::pair<int, int>>
+ * @return std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>>
  */
 
-std::vector<std::pair<int, int>> Pawn::getPossibleMoves(Board &board)
+std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> Pawn::getPossibleMoves(Board &board)
 {
     // Initialize vector
-    std::vector<std::pair<int, int>> possibleMoves;
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> possibleMoves;
+
+    // Initialize pairs
+    std::pair<int, int> startPosition;
+    std::pair<int, int> endPosition;
 
     // Get row and column of the position
     int xInitial = position.first;
@@ -190,8 +200,12 @@ std::vector<std::pair<int, int>> Pawn::getPossibleMoves(Board &board)
             // Check if the move is valid
             if (isValidMove(std::make_pair(i, j), board))
             {
+                // Set start and end positions
+                startPosition = std::make_pair(xInitial, yInitial);
+                endPosition = std::make_pair(i, j);
+
                 // Add the move to the vector
-                possibleMoves.push_back(std::make_pair(i, j));
+                possibleMoves.push_back(std::make_pair(startPosition, endPosition));
             }
         }
     }

@@ -42,7 +42,7 @@ public:
 
     // Methods
     bool isValidMove(std::pair<int, int>, Board&);
-    std::vector<std::pair<int, int>> getPossibleMoves(Board&);
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> getPossibleMoves(Board&);
 };
 
 #endif
