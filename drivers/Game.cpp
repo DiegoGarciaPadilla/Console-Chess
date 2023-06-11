@@ -117,7 +117,7 @@ void Game::playGame()
     std::pair<int, int> finalPosition;
 
     // Start game
-    while (!isCheckmate(this->turn))
+    while (!isCheckmate(turn) || !isStalemate(turn))
     {
         // Print board
         printBoard();
@@ -156,13 +156,20 @@ void Game::playGame()
     }
 
     // Print winner
-    if (turn == 0)
+    if (!isCheckmate(turn))
     {
-        std::cout << "Black wins!" << std::endl;
+        std::cout << "Stalemate!" << std::endl;
     }
     else
     {
-        std::cout << "White wins!" << std::endl;
+        if (turn == 0)
+        {
+            std::cout << "Black wins!" << std::endl;
+        }
+        else
+        {
+            std::cout << "White wins!" << std::endl;
+        }
     }
     std::cout << std::endl;
 
@@ -422,9 +429,7 @@ bool Game::isCheckAfterMove(std::pair<int, int> initialPosition, std::pair<int, 
 bool Game::isCheckmate(int turn)
 {
     // Initialize variables
-    std::pair<int, int> kingPosition;
     std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> possibleMoves;
-
     bool isCheckmate = true;
 
     // Check if the player is in check
@@ -432,9 +437,6 @@ bool Game::isCheckmate(int turn)
     {
         return false;
     }
-
-    // Get the position of the King
-    kingPosition = board.getKingPosition(turn);
 
     // Get all the possible moves for the player
     possibleMoves = board.getAllPossibleMoves(turn);
@@ -456,6 +458,38 @@ bool Game::isCheckmate(int turn)
 
     // Else, the player is in checkmate
     return isCheckmate;
+}
+
+/**
+ * @brief Checks if the player is in stalemate
+ *
+ * @return true
+ * @return false
+ */
+
+bool Game::isStalemate(int turn)
+{
+    // Initialize variables
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> possibleMoves;
+    bool isStalemate = true;
+
+    // Check if the player is in check, if so, it is not a stalemate
+    if (isCheck(turn))
+    {
+        return false;
+    }
+
+    // Get all the possible moves for the player
+    possibleMoves = board.getAllPossibleMoves(turn);
+
+    // Check if there are any possible moves
+    if (possibleMoves.size() > 0)
+    {
+        isStalemate = false;
+    }
+
+    // Else, the player is in checkmate
+    return isStalemate;
 }
 
 #endif
