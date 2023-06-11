@@ -121,7 +121,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     }
 
     // Check if the pawn is moving horizontally
-    if (abs(xDifference) > 1)
+    if (abs(xDifference) >= 1)
     {
         return false;
     }
@@ -148,13 +148,14 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
         return false;
     }
 
-    // Check if the pawn is moving diagonally more than 1 space
-    if (abs(yDifference) == abs(xDifference) && abs(yDifference) > 1)
+    // Check if the pawn is moving other than vertically or diagonally
+    if (abs(xDifference) >= 1 &&  abs(yDifference) >= 1)
     {
         return false;
     }
-    // Check if the pawn is moving diagonally without capturing
-    else if (abs(yDifference) == abs(xDifference) && abs(yDifference) == 1 && !board.isOccupied(positionToMove))
+
+    // Check if the pawn is moving diagonally
+    if (abs(xDifference) == 1 && abs(yDifference) == 1 && !board.isOccupied(positionToMove))
     {
         return false;
     }
