@@ -148,7 +148,7 @@ void Game::playGame()
         if (!movePiece(initialPosition, finalPosition))
         {
             // Pause
-            std::cin.ignore();
+            system("pause");
         }
 
         // Clear screen
