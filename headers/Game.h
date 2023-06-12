@@ -53,10 +53,10 @@ public:
     bool movePiece(std::pair<int, int>, std::pair<int, int>);
     bool capturePiece(std::pair<int, int>);
 
-    bool isCheck(int turn);
+    bool isCheck(int);
     bool isCheckAfterMove(std::pair<int, int>, std::pair<int, int>);
-    bool isCheckmate(int turn);
-    bool isStalemate(int turn);
+    bool isCheckmate(int);
+    bool isStalemate(int);
 };
 
 #endif
