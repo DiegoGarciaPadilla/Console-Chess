@@ -90,6 +90,14 @@ bool King::getHasMoved() { return hasMoved; };
 
 void King::setPosition(std::pair<int, int> position) { this->position = position; };
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void King::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; };
+
 // Methods
 
 /**

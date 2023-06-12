@@ -90,6 +90,14 @@ bool Bishop::getHasMoved() { return hasMoved; };
 
 void Bishop::setPosition(std::pair<int, int> position) { this->position = position; };
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void Bishop::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; };
+
 // Methods
 
 /**

@@ -24,12 +24,9 @@ class Piece
 protected:
     // Attributes
     int color; // 0 = white, 1 = black
-
     std::string name = " ";   // Name of the piece
     std::string symbol = " "; // Symbol to print on the board
-
     std::pair<int, int> position; // (x, y)
-
     bool hasMoved = false; // True if the piece has moved at least once
 public:
     // Constructor
@@ -45,6 +42,7 @@ public:
 
     // Setters (the setters are virtual because they are overriden in the subclasses)
     virtual void setPosition(std::pair<int, int>);
+    virtual void setHasMoved(bool);
 
     // Methods (the methods are virtual because they are overriden in the subclasses)
     virtual bool isValidMove(std::pair<int, int>, Board&) = 0;

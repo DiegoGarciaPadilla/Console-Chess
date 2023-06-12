@@ -335,7 +335,7 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
     // Check if the piece can move to the final position
     if (!board.getPiece(initialPosition)->isValidMove(finalPosition, board))
     {
-        std::cout << "Piece cannot move to the final position" << std::endl;
+        std::cout << "The " << board.getPiece(initialPosition)->getName() << " cannot move to the final position" << std::endl;
         return false;
     }
 
@@ -346,12 +346,6 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
         return false;
     }
 
-    // If the final position is occupied by an enemy piece, capture it
-    if (board.isOccupied(finalPosition) && board.getPiece(finalPosition)->getColor() != turn)
-    {
-        capturePiece(finalPosition);
-    }
-
     // Check if the move puts the player in check
     if (isCheckAfterMove(initialPosition, finalPosition))
     {
@@ -359,8 +353,15 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
         return false;
     }
 
+    // If the final position is occupied by an enemy piece, capture it
+    if (board.isOccupied(finalPosition) && board.getPiece(finalPosition)->getColor() != turn)
+    {
+        capturePiece(finalPosition);
+    }
+
     // Move piece
     board.movePiece(initialPosition, finalPosition);
+    board.getPiece(finalPosition)->setHasMoved(true);
 
     // Change turn
     turn = (turn + 1) % 2;

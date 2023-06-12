@@ -90,6 +90,14 @@ bool Queen::getHasMoved() { return hasMoved; };
 
 void Queen::setPosition(std::pair<int, int> position) { this->position = position; }
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void Queen::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; }
+
 // Methods
 
 /**

@@ -70,6 +70,15 @@ std::string Knight::getSymbol() { return symbol; }
 
 std::pair<int, int> Knight::getPosition() { return position; }
 
+/**
+ * @brief Get the Has Moved object
+ *
+ * @return true
+ * @return false
+ */
+
+bool Knight::getHasMoved() { return hasMoved; };
+
 // Setters
 
 /**
@@ -81,13 +90,12 @@ std::pair<int, int> Knight::getPosition() { return position; }
 void Knight::setPosition(std::pair<int, int> position) { this->position = position; }
 
 /**
- * @brief Get the Has Moved object
+ * @brief Set the Has Moved object
  *
- * @return true
- * @return false
+ * @param hasMoved
  */
 
-bool Knight::getHasMoved() { return hasMoved; };
+void Knight::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; }
 
 // Methods
 
@@ -137,14 +145,14 @@ bool Knight::isValidMove(std::pair<int, int> positionToMove, Board &board)
 
 /**
  * @brief Return a vector with all the possible moves
- * 
+ *
  * @param board
  * @return std::vector<std::pair<int, int>>
  */
 
 /**
  * @brief Return a vector with all the possible moves
- * 
+ *
  * @param board
  * @return std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>>
  */

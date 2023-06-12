@@ -90,6 +90,14 @@ bool Rook::getHasMoved() { return hasMoved; };
 
 void Rook::setPosition(std::pair<int, int> position) { this->position = position; }
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void Rook::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; }
+
 // Methods
 
 /**

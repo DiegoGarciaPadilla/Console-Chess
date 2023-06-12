@@ -23,7 +23,7 @@ private:
     // Attributes
     std::string name = "Pawn"; // Name of the piece
     std::string symbol = "P";  // P for pawn
-    bool isFirstMove = true;   // True if it's the first move of the piece
+    bool hasMoved = false; // True if the piece has moved at least once
 public:
     // Constructor
     Pawn();
@@ -34,11 +34,11 @@ public:
     int getColor();
     std::string getSymbol();
     std::pair<int, int> getPosition();
-    bool getIsCaptured();
     bool getHasMoved();
 
     // Setters
     void setPosition(std::pair<int, int>);
+    void setHasMoved(bool);
 
     // Methods
     bool isValidMove(std::pair<int, int>, Board&);

@@ -98,6 +98,14 @@ bool Piece::getHasMoved() { return hasMoved; };
 
 void Piece::setPosition(std::pair<int, int> position) { this->position = position; };
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void Piece::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; };
+
 // Methods
 
 /**

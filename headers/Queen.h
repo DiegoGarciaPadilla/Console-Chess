@@ -37,6 +37,7 @@ public:
 
     // Setters
     void setPosition(std::pair<int, int>);
+    void setHasMoved(bool);
 
     // Methods
     bool isValidMove(std::pair<int, int>, Board&);

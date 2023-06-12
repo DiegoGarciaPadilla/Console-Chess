@@ -90,6 +90,14 @@ bool Pawn::getHasMoved() { return hasMoved; };
 
 void Pawn::setPosition(std::pair<int, int> position) { this->position = position; }
 
+/**
+ * @brief Set the Has Moved object
+ *
+ * @param hasMoved
+ */
+
+void Pawn::setHasMoved(bool hasMoved) { this->hasMoved = hasMoved; }
+
 // Methods
 
 /**
@@ -137,7 +145,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     }
 
     // Check for first move
-    if (isFirstMove)
+    if (!hasMoved)
     {
         // Check if the pawn is moving more than 2 spaces
         if (abs(yDifference) > 2 || abs(yDifference) == 2 && abs(xDifference) > 0)
@@ -153,7 +161,7 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     }
 
     // Check if the pawn is moving more than 1 space after the first move
-    if (!isFirstMove && abs(yDifference) > 1)
+    if (hasMoved && abs(yDifference) > 1)
     {
         return false;
     }
@@ -187,9 +195,6 @@ bool Pawn::isValidMove(std::pair<int, int> positionToMove, Board &board)
     {
         return false;
     }
-
-    // Set first move to false
-    isFirstMove = false;
 
     // Return true if the move is valid
     return true;
