@@ -48,6 +48,7 @@ public:
     void playGame();
     void printBoard();
     void printCapturedPieces();
+    void clearScreen();
 
     bool movePiece(std::pair<int, int>, std::pair<int, int>);
     bool capturePiece(std::pair<int, int>);

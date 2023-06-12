@@ -107,7 +107,7 @@ void Game::newGame()
 void Game::playGame()
 {
     // Clear screen
-    system("cls");
+    clearScreen();
 
     // Initialize variables
     int xInitial, yInitial, xFinal, yFinal;
@@ -117,7 +117,7 @@ void Game::playGame()
     std::pair<int, int> finalPosition;
 
     // Start game
-    while (!isCheckmate(turn) || !isStalemate(turn))
+    while (!isCheckmate(turn) && !isStalemate(turn))
     {
         // Print board
         printBoard();
@@ -147,12 +147,14 @@ void Game::playGame()
         // Move piece
         if (!movePiece(initialPosition, finalPosition))
         {
-            // Pause
-            system("pause");
+            std::cout << "Press enter to continue...";
+            std::cin.get();
+            std::cin.get();
         }
 
         // Clear screen
-        system("cls");
+        clearScreen();
+        
     }
 
     // Print winner
@@ -182,7 +184,9 @@ void Game::playGame()
     std::cout << std::endl;
 
     // Pause
-    system("pause");
+    std::cout << "Press enter to continue...";
+    std::cin.get();
+    std::cin.get();
 
     // Destroy game
     this->~Game();
@@ -245,6 +249,26 @@ void Game::printCapturedPieces()
     {
         std::cout << blackCapturedPieces[i]->getSymbol() << " ";
     }
+}
+
+/**
+ * @brief Clear screen
+ * 
+ */
+
+void Game::clearScreen()
+{
+    // Check OS
+    #ifdef _WIN32
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #elif __APPLE__
+        system("clear");
+    #else
+        std::cout << "\033[2J\033[1;1H";
+    #error "OS not supported!"
+    #endif  
 }
 
 /**
