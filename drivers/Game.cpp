@@ -357,6 +357,17 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
     if (board.isOccupied(finalPosition) && board.getPiece(finalPosition)->getColor() != turn)
     {
         capturePiece(finalPosition);
+        
+        // Add the piece to the captured pieces
+        if (turn == 0)
+        {
+            whiteCapturedPieces.push_back(board.getPiece(finalPosition));
+        }
+
+        else
+        {
+            blackCapturedPieces.push_back(board.getPiece(finalPosition));
+        }
     }
 
     // Move piece
