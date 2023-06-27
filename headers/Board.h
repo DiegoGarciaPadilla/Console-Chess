@@ -24,6 +24,7 @@ class Board
 private:
     // Attributes
     Piece *board[8][8]; // Board
+    std::pair<std::pair<int, int>, std::pair<int, int>> lastMove; // Last move made
 public:
     // Constructor
     Board();
@@ -33,6 +34,13 @@ public:
 
     // Destructor
     ~Board();
+
+    // Getters
+    Piece *getPiece(std::pair<int, int>);
+    std::pair<std::pair<int, int>, std::pair<int, int>> getLastMove();
+
+    // Setters
+    void setLastMove(std::pair<int, int>, std::pair<int, int>);
 
     // Methods
     void initializeBoard();
@@ -48,8 +56,6 @@ public:
 
     bool isAttacked(int, std::pair<int, int>);
     bool isCheck(int);
-    
-    Piece *getPiece(std::pair<int, int>);
 };
 
 #endif

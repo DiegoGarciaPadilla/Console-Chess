@@ -362,6 +362,7 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
     // Move piece
     board.movePiece(initialPosition, finalPosition);
     board.getPiece(finalPosition)->setHasMoved(true);
+    board.setLastMove(initialPosition, finalPosition);
 
     // Change turn
     turn = (turn + 1) % 2;

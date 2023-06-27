@@ -84,6 +84,57 @@ Board::~Board()
     }
 }
 
+// Getters
+
+/**
+ * @brief Get the piece in the given position
+ *
+ * @param position
+ * @return Piece
+ */
+
+Piece *Board::getPiece(std::pair<int, int> position)
+{
+    // Get row and column of the position
+    int x = position.first;
+    int y = position.second;
+
+    // Check if the position is valid
+    if (x < 0 || x > 7 || y < 0 || y > 7)
+    {
+        std::cout << "Invalid position" << std::endl;
+        return nullptr;
+    }
+
+    // Return the piece in the position
+    return board[x][y];
+}
+
+/**
+ * @brief Get the last move
+ *
+ * @return std::pair<std::pair<int, int>, std::pair<int, int>>
+ */
+
+std::pair<std::pair<int, int>, std::pair<int, int>> Board::getLastMove()
+{
+    return lastMove;
+}
+
+// Setters
+
+/**
+ * @brief Set the attribute lastMove
+ *
+ * @param initialPosition, finalPosition
+ */
+
+void Board::setLastMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
+{
+    lastMove = std::make_pair(initialPosition, finalPosition);
+}
+
+
 // Methods
 
 /**
@@ -440,30 +491,6 @@ bool Board::isCheck(int color)
 
     // Check if the king is attacked
     return isAttacked(color, kingPosition);
-}
-
-/**
- * @brief Get the piece in the given position
- *
- * @param position
- * @return Piece
- */
-
-Piece *Board::getPiece(std::pair<int, int> position)
-{
-    // Get row and column of the position
-    int x = position.first;
-    int y = position.second;
-
-    // Check if the position is valid
-    if (x < 0 || x > 7 || y < 0 || y > 7)
-    {
-        std::cout << "Invalid position" << std::endl;
-        return nullptr;
-    }
-
-    // Return the piece in the position
-    return board[x][y];
 }
 
 #endif
