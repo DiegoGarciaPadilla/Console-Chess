@@ -357,17 +357,6 @@ bool Game::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> fi
     if (board.isOccupied(finalPosition) && board.getPiece(finalPosition)->getColor() != turn)
     {
         capturePiece(finalPosition);
-        
-        // Add the piece to the captured pieces
-        if (turn == 0)
-        {
-            whiteCapturedPieces.push_back(board.getPiece(finalPosition));
-        }
-
-        else
-        {
-            blackCapturedPieces.push_back(board.getPiece(finalPosition));
-        }
     }
 
     // Move piece
@@ -436,23 +425,21 @@ bool Game::isCheck(int turn)
 bool Game::isCheckAfterMove(std::pair<int, int> initialPosition, std::pair<int, int> finalPosition)
 {
     // Initialize variables
+    Board dummyBoard(board);
     std::pair<int, int> kingPosition;
     bool isCheck = false;
 
-    // Get the position of the King
-    kingPosition = board.getKingPosition(turn);
-
     // Move piece
-    board.movePiece(initialPosition, finalPosition);
-
-    // Check if the King is in check
-    isCheck = board.isCheck(turn);
-
-    // Move piece back
-    board.movePiece(finalPosition, initialPosition);
+    dummyBoard.movePiece(initialPosition, finalPosition);
 
     // Return true if the King is in check
+    isCheck = dummyBoard.isCheck(turn);
+
+    // Delete dummyBoard
+    dummyBoard.~Board();
+
     return isCheck;
+
 }
 
 /**

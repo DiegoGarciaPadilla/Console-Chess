@@ -79,7 +79,7 @@ Board::~Board()
     {
         for (int j = 0; j < 8; j++)
         {
-            delete board[i][j];
+            board[i][j] = nullptr;
         }
     }
 }
@@ -319,9 +319,12 @@ std::pair<int, int> Board::getKingPosition(int color)
     {
         for (int j = 0; j < 8; j++)
         {
-            if (board[i][j] != nullptr && board[i][j]->getColor() == color && board[i][j]->getName() == "King")
+            if (board[i][j] != nullptr)
             {
-                kingPosition = board[i][j]->getPosition();
+                if (board[i][j]->getColor() == color && board[i][j]->getName() == "King")
+                {
+                    kingPosition = board[i][j]->getPosition();
+                }
             }
         }
     }
