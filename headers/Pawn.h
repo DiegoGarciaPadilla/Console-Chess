@@ -43,6 +43,8 @@ public:
     // Methods
     bool isValidMove(std::pair<int, int>, Board&);
     std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> getPossibleMoves(Board&);
+
+    bool isEnPassant(Board&, std::pair<int, int>); 
 };
 
 #endif
