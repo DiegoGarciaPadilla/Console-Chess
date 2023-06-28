@@ -345,9 +345,39 @@ bool Board::movePiece(std::pair<int, int> initialPosition, std::pair<int, int> f
     // Update the position of the piece
     board[xInitial][yInitial]->setPosition(finalPosition);
 
+    // Delete the piece in the final position if it exists
+    if (board[xFinal][yFinal] != nullptr)
+    {
+        removePiece(finalPosition);
+    }
+
     // Update the board
     board[xFinal][yFinal] = board[xInitial][yInitial];
-    board[xInitial][yInitial] = nullptr;
+    removePiece(initialPosition);
+
+    // Return true
+    return true;
+}
+
+/**
+ * @brief Remove a piece from the board
+ *
+ * @param position
+ * @return true
+ * @return false
+ */
+
+bool Board::removePiece(std::pair<int, int> position)
+{
+    // Get row and column of the position
+    int x = position.first;
+    int y = position.second;
+
+    // Delete the piece
+    delete board[x][y];
+
+    // Update the board
+    board[x][y] = nullptr;
 
     // Return true
     return true;
